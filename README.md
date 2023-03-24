@@ -17,6 +17,11 @@ You can find example of different managers in the examples directory. You need t
 - [ ] Comments in files
 - [ ] Special files
 
+## Additional plans
+- Warning for certain license types
+- Simple CLI tool without config
+- Implementation in other js build tools
+
 ## Why Deno
 The Project is written in TypeScript using deno.<br>
 Deno was my first choice because it does't create a folder for dependencies, supports TypeScript out of the box, has a decent standard library and is more stable and has a wider support than bun. Also deno allows the project to be bundled and "compiled".
