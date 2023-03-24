@@ -20,5 +20,10 @@ export function parseConfig(txt:string): Config {
     }else if(json.json_report !== undefined) {
         console.error("Config Error: \"json_report\" is of type " + typeof json.json_report + " but type string is expected.");
     }
+    if (typeof json.allow_api_calls === "boolean") {
+        config.allow_api_calls = json.allow_api_calls;
+    }else if(json.allow_api_calls !== undefined) {
+        console.error("Config Error: \"allow_api_calls\" is of type " + typeof json.allow_api_calls + " but type boolean is expected.");
+    }
     return config;
 }

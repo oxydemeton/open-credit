@@ -1,7 +1,7 @@
 import { Module } from "./Module.ts";
 import * as Toml from "https://deno.land/std@0.180.0/encoding/toml.ts";
 
-export async function crawlCargoLock(path: string, requestCargoApi = true): Promise<Module[]> {
+export async function crawlCargoLock(path: string, requestCargoApi = false): Promise<Module[]> {
     const modules: Module[] = []
 
     const cargoLockRaw = await Deno.readTextFile(path)
