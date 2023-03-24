@@ -8,7 +8,7 @@ const config = readConfig()!
 for await (const entry of FS.walk(".")) {
     switch (entry.name) {
         case "node_modules":
-            if(!config.exclude.includes(entry.path)) crawlNodeModules(entry.path);
+            if(!config.exclude.includes(entry.path) && entry.isDirectory) crawlNodeModules(entry.path);
             break;
     }
 }
