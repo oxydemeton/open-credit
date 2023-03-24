@@ -27,6 +27,11 @@ export function parseConfig(txt:string): Config {
     }
     if (json.managers) {
         config.managers = json.managers
+        if(config.managers && config.managers.length) {
+            for (let i = 0; i < config.managers.length; i++) {
+                config.managers[i] = config.managers[i].toLowerCase();               
+            }
+        }
     }
     return config;
 }
