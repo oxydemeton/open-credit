@@ -15,10 +15,10 @@ export function parseConfig(txt:string): Config {
     }else if(json.exclude !== undefined) {
         console.error("Config Error: \"exclude\" is of type " + typeof json.exclude + " but type object/array is expected.");
     }
-    if (typeof json.json_report === "object") {
-        config.json_report = json.output;
+    if (typeof json.json_report === "string") {
+        config.json_report = json.json_report;
     }else if(json.json_report !== undefined) {
-        console.error("Config Error: \"json_report\" is of type " + typeof json.json_report + " but type object/array is expected.");
+        console.error("Config Error: \"json_report\" is of type " + typeof json.json_report + " but type string is expected.");
     }
     return config;
 }
