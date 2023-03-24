@@ -4,5 +4,6 @@ export class Module {
     version?: string
     license?: string
     description?: string 
-    url?: string
+    repo?: string
+    homepage?: string
 }
