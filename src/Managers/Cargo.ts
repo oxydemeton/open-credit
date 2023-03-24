@@ -9,7 +9,13 @@ export async function crawlCargoLock(path: string, requestCargoApi = false): Pro
     if (typeof cargoLock.package !== "object" && cargoLock.package) return []
     const pack = cargoLock.package as Array<object>;
     for (let i = 0; i < pack.length; i++) { 
-        if(!requestCargoApi) modules.push(pack[i] as Module)
+        if(!requestCargoApi){
+            const p = pack[i] as any
+            const mod: Module = {}
+            if(p.name) mod.name = p.name.toString()
+            if(p.version) mod.version = p.version.toString()
+            modules.push(mod)
+        }
         else {
             const mod_base = pack[i] as Module
             if(!mod_base.name) continue;
