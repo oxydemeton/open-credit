@@ -11,11 +11,11 @@ const modules: Module[] = []
 for await (const entry of FS.walk(".")) {
     switch (entry.name) {
         case "node_modules":
-            if(!config.managers.includes("npm")) break;
+            if(config.managers && !config.managers.includes("npm")) break;
             if(!config.exclude.includes(entry.path) && entry.isDirectory) Array.prototype.push.apply(modules, await crawlNodeModules(entry.path))
             break;
         case "Cargo.lock":
-            if(!config.managers.includes("cargo")) break;
+            if(config.managers && !config.managers.includes("cargo")) break;
             if(!config.exclude.includes(entry.path) && entry.isFile) Array.prototype.push.apply(modules, await crawlCargoLock(entry.path))
             break;
     }
