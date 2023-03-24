@@ -1,5 +1,5 @@
 {
-    "output": "CREDITS.md",
-    "exclude": [],
-    "json_report": "opencredit.report.json"
+    "output": "CREDITS.md",                     //Output File in Markdown
+    "exclude": [],                              //Directories to exclude
+    "json_report": "opencredit.report.json"     //Optional: json file with detailed informations
 }
