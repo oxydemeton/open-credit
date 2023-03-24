@@ -25,5 +25,8 @@ export function parseConfig(txt:string): Config {
     }else if(json.allow_api_calls !== undefined) {
         console.error("Config Error: \"allow_api_calls\" is of type " + typeof json.allow_api_calls + " but type boolean is expected.");
     }
+    if (json.managers) {
+        config.managers = json.managers
+    }
     return config;
 }
