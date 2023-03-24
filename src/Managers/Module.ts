@@ -6,4 +6,5 @@ export class Module {
     description?: string 
     repo?: string
     homepage?: string
+    documentation?: string
 }
