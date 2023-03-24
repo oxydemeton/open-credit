@@ -1,6 +1,13 @@
 {
   "version": "2",
   "remote": {
+    "https://deno.land/std@0.180.0/collections/_utils.ts": "5114abc026ddef71207a79609b984614e66a63a4bda17d819d56b0e72c51527e",
+    "https://deno.land/std@0.180.0/collections/deep_merge.ts": "5a8ed29030f4471a5272785c57c3455fa79697b9a8f306013a8feae12bafc99a",
+    "https://deno.land/std@0.180.0/encoding/toml.ts": "56e854b1f46e8a60dd3ba9e31d701cd3f9bba121e32609df02fabae17fca8546",
+    "https://deno.land/std@0.180.0/toml/_parser.ts": "ca98edfbdbc5741734134548db65d4c10ba60abbd739f10f949aa912664fd86e",
+    "https://deno.land/std@0.180.0/toml/mod.ts": "dbaeb6039241406b369d3edbd59434dc938256e1d8664115277c5cadcbfacd81",
+    "https://deno.land/std@0.180.0/toml/parse.ts": "627c14a36b1df3f7aaa606833dbf0d001fa9901b77bad3da1a887c812bfad472",
+    "https://deno.land/std@0.180.0/toml/stringify.ts": "f59c0647ddc6a3a1215294b279c1ea6c8947d262de9d7067b4500f75616cd259",
     "https://deno.land/std@0.181.0/_util/asserts.ts": "178dfc49a464aee693a7e285567b3d0b555dc805ff490505a8aae34f9cfb1462",
     "https://deno.land/std@0.181.0/_util/os.ts": "d932f56d41e4f6a6093d56044e29ce637f8dcc43c5a90af43504a889cf1775e3",
     "https://deno.land/std@0.181.0/fs/_util.ts": "65381f341af1ff7f40198cee15c20f59951ac26e51ddc651c5293e24f9ce6f32",
