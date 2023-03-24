@@ -1,0 +1,1 @@
+const config = import("./lib/Config").defaultConfig

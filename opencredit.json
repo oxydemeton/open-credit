@@ -1,0 +1,5 @@
+{
+    "output": "CREDITS.md",
+    "exclude": [],
+    "json_report": "opencredit.report.json"
+}
