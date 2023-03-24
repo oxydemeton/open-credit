@@ -1,3 +1,4 @@
-import { parseConfig } from "./config/parse.ts";
-const config = parseConfig("{}")
+import { readConfig } from "./config/ReadConfig.ts";
+
+const config = readConfig()
 console.log(config);
