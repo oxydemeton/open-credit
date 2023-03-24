@@ -1,0 +1,15 @@
+{
+    "imports": {
+      "std/": "https://deno.land/std@0.179.0/"
+    },
+    "lint": {
+      "files": {
+        "include": ["src/"]
+      },
+      "rules": {
+        "tags": ["recommended"],
+        "include": ["ban-untagged-todo"],
+        "exclude": ["no-unused-vars", "no-explicit-any"]
+      }
+    }
+}
