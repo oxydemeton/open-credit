@@ -15,7 +15,8 @@ export async function crawlNodeModules(root: string): Promise<Module[]> {
         if(json.version) mod.version = json.version.toString();
         if(json.license) mod.license = json.license.toString();
         if(json.description) mod.description = json.description.toString();
-        
+        if(json.homepage) mod.homepage = json.homepage.toString()
+
         modules.push(mod)
     }
     return modules
