@@ -14,27 +14,32 @@ export async function crawlCargoLock(
     for (let i = 0; i < pack.length; i++) {
         if (!requestCargoApi) {
             const p = pack[i] as any
-            const mod: Module = {}
+            const mod: Module = {manager: "cargo"}
             if (p.name) mod.name = p.name.toString()
             if (p.version) mod.version = p.version.toString()
             modules.push(mod)
         } else {
             const mod_base = pack[i] as Module
+            mod_base.manager = "cargo"
             if (!mod_base.name) continue
             const response = await fetch(
                 "https://crates.io/api/v1/crates/" + mod_base.name,
             )
             if (!response.ok) {
-                modules.push(pack[i] as Module)
+                const mod = pack[i] as Module
+                mod_base.manager = "cargo"
+                modules.push(mod)
                 continue
             }
             const json = await response.json()
             const crate = json.crate
             if (!crate) {
-                modules.push(pack[i] as Module)
+                const mod = pack[i] as Module
+                mod.manager = "cargo"
+                modules.push(mod)
                 continue
             }
-            const mod: Module = {}
+            const mod: Module = {manager: "cargo"}
             if (crate.name) mod.name = crate.name.toString()
             if (crate.description) {
                 mod.description = crate.description.toString()
