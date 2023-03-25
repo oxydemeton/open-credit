@@ -61,7 +61,19 @@ The config file is a json or jsonc file for different settings. Default
   get further information about packages etc.
 - `managers`: Array of managers which will be searched for.
 
-### Command Line Arguments
+### CLI
+
+### Commands
+
+- `init`: Creates a new config file. Use `--conf` to specify a non default name
+- `stats`: Print out statistics about dependencies of your project. Requires a
+  config file. Specify a non default config file name with `--conf`.
+- `run`: Lists all dependencies in a markdown format. Requires a config file.
+  Use `--conf` to specify a non default config file name. Use `--json` to also
+  generate a json overview over all dependencies and `--md` to overwrite the
+  output file.
+
+### Args
 
 When running opencredit you can specify:
 
@@ -87,9 +99,9 @@ the script uses to identify modules.
 ## Additional plans
 
 - Warning for certain license types
-- Simple CLI tool without config
+- Simple CLI tool without config file need
 - Implementation in other js build tools
-- Output of stats: How many packages. How old they are....
+- Add more Stats
 
 ## Why Deno
 
