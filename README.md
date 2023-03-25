@@ -1,7 +1,7 @@
 # Open Credit
 
 An small open project to search for packages you use and mention them in one
-file.
+file.<br> It uses Deno as a typescript runtime.
 
 ## How to use
 
