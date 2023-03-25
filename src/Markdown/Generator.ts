@@ -12,7 +12,7 @@ export function generate(modules: Module[]): string {
     split_modules.cargo = filterDuplicates(split_modules.cargo)
     split_modules.npm = filterDuplicates(split_modules.npm)
 
-    if(split_modules.npm.length > 0) writeLine("### Cargo Modules")
+    if(split_modules.cargo.length > 0) writeLine("### Cargo Modules")
     split_modules.cargo.forEach((mod) => {
         writeLine("- " + mod.name)
         if (mod.author) writeLine("    - Author: " + mod.author)
