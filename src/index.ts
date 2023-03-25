@@ -37,6 +37,7 @@ if (args[0] === "run") {
         const json = generateJson(modules, true)
         Deno.writeTextFileSync(config.json_report, json)
     }
+    console.log("JSON written into: " + config.json_report)    
 } else if (args[0] === "stats") {
     console.log("Stats for your project:")
     console.log(statsToString(generateStats(modules)))
