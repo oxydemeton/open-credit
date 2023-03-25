@@ -1,7 +1,9 @@
 import { readConfig } from "./config/ReadConfig.ts"
 import { generate as mdGenerate } from "./Markdown/Generator.ts"
 import { collectAll } from "./cli/Collect.ts"
+import { parse as parseArgs } from "./cli/Args.ts"
 
+if (parseArgs() === null) Deno.exit(0)
 const config = readConfig()!
 
 //Process folders
