@@ -53,6 +53,22 @@ export function parse(): null | [Command, Args | null] {
         ]
     }
 
+    if (args._.includes("stats")) {
+        if(args.h) {
+            console.log("Open-credit " + version);
+            console.log("Stats:")
+            console.log("Prints statistics about packages/modules/crates used in the project.")
+            console.log("Parameter:")
+            console.log("  -h print help")
+            console.log(
+                "  --conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
+            )
+            
+        }
+        return ["stats", {
+            overwrite_config: args.conf,
+        }]
+    }
     //Print general Help
     console.log("Open-credit " + version)
     console.log("Commands:")
@@ -78,6 +94,13 @@ export function parse(): null | [Command, Args | null] {
         "    User --conf <file_name> to specify the name of the config file. Default: opencredit.jsonc",
     )
 
+    console.log("")
+    console.log("  stats:")
+    console.log("    Prints statistics about packages/modules/crates used in the project.")
+    console.log(
+        "    User --conf <file_name> to specify the name of the config file. Default: opencredit.jsonc",
+    )
+    
     if (!args.h) Deno.exit(1)
     return null
 }
@@ -86,4 +109,4 @@ export interface Args {
     overwrite_json?: string
     overwrite_config?: string
 }
-export type Command = "run" | "init"
+export type Command = "run" | "init" | "stats"
