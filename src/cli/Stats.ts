@@ -1,5 +1,5 @@
-import { splitByManager } from "../Generators/Split.ts";
-import { Module } from "../Managers/Module.ts";
+import { splitByManager } from "../Generators/Split.ts"
+import { Module } from "../Managers/Module.ts"
 
 export function generateStats(modules: Module[]): Stats {
     const stats: Stats = {}

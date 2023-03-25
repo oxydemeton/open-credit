@@ -26,7 +26,7 @@ if (args[1]?.overwrite_md) config.output = args[1]?.overwrite_md
 //Collect Modules
 const modules = await collectAll(config)
 
-if(args[0] === "run") {
+if (args[0] === "run") {
     //Generate Markdown
     const md = mdGenerate(modules)
     Deno.writeTextFileSync(config.output, md)
@@ -37,7 +37,7 @@ if(args[0] === "run") {
         const json = generateJson(modules, true)
         Deno.writeTextFileSync(config.json_report, json)
     }
-}else if(args[0] === "stats") {
-    console.log("Stats for your project:")    
-    console.log(statsToString(generateStats(modules)));
+} else if (args[0] === "stats") {
+    console.log("Stats for your project:")
+    console.log(statsToString(generateStats(modules)))
 }
