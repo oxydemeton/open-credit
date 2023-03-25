@@ -3,7 +3,7 @@ export class Module {
     name?: string
     version?: string
     license?: string
-    description?: string 
+    description?: string
     repo?: string
     homepage?: string
     documentation?: string

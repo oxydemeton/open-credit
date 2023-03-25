@@ -21,6 +21,7 @@ You can find example of different managers in the examples directory. You need t
 - Warning for certain license types
 - Simple CLI tool without config
 - Implementation in other js build tools
+- Output of stats: How many packages. How old they are....
 
 ## Why Deno
 The Project is written in TypeScript using deno.<br>
