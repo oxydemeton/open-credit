@@ -31,7 +31,7 @@ Deno.writeTextFileSync(config.output, md)
 console.log("Markdown written into: " + config.output)
 
 //Generate JSON
-if(config.json_report){
-    const json = generateJson(modules)
+if (config.json_report) {
+    const json = generateJson(modules, true)
     Deno.writeTextFileSync(config.json_report, json)
 }
