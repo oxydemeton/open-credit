@@ -1,5 +1,6 @@
 import { filterDuplicates } from "../Managers/Filter.ts"
 import { Module } from "../Managers/Module.ts"
+import { splitByManager } from "./Split.ts"
 
 export function generate(modules: Module[]): string {
     let md = "# Mentions\n"
@@ -8,11 +9,11 @@ export function generate(modules: Module[]): string {
     const writeLine = (txt: string) => {
         md += txt + "\n"
     }
-    const split_modules = separateModules(modules)
+    const split_modules = splitByManager(modules)
     split_modules.cargo = filterDuplicates(split_modules.cargo)
     split_modules.npm = filterDuplicates(split_modules.npm)
 
-    if(split_modules.cargo.length > 0) writeLine("### Cargo Modules")
+    if (split_modules.cargo.length > 0) writeLine("### Cargo Modules")
     split_modules.cargo.forEach((mod) => {
         writeLine("- " + mod.name)
         if (mod.author) writeLine("    - Author: " + mod.author)
@@ -25,7 +26,7 @@ export function generate(modules: Module[]): string {
         }
         if (mod.homepage) writeLine("    - Homepage: " + mod.homepage)
     })
-    if(split_modules.npm.length > 0) writeLine("### NPM Modules")
+    if (split_modules.npm.length > 0) writeLine("### NPM Modules")
     split_modules.npm.forEach((mod) => {
         writeLine("- " + mod.name)
         if (mod.author) writeLine("    - Author: " + mod.author)
@@ -38,22 +39,4 @@ export function generate(modules: Module[]): string {
         }
     })
     return md
-}
-
-function separateModules(
-    modules: Module[],
-): { npm: Module[]; cargo: Module[] } {
-    const cargoModules: Module[] = []
-    const npmModules: Module[] = []
-    modules.forEach((mod) => {
-        if (mod.manager === "cargo") {
-            cargoModules.push(mod)
-        } else if (mod.manager === "npm") {
-            npmModules.push(mod)
-        }
-    })
-    return {
-        cargo: cargoModules,
-        npm: npmModules,
-    }
 }
