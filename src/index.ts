@@ -3,6 +3,7 @@ import { generate as mdGenerate } from "./Generators/Md.ts"
 import { collectAll } from "./cli/Collect.ts"
 import { parse as parseArgs } from "./cli/Args.ts"
 import { init as initConfigFile } from "./cli/Init.ts"
+import { generateJson } from "./Generators/Json.ts"
 
 const args = parseArgs()
 if (args === null) Deno.exit(0)
@@ -21,9 +22,16 @@ const config = readConfig(config_path)!
 if (args[1]?.overwrite_json) config.json_report = args[1]?.overwrite_json
 if (args[1]?.overwrite_md) config.output = args[1]?.overwrite_md
 
-//Process folders
+//Collect Modules
 const modules = await collectAll(config)
 
+//Generate Markdown
 const md = mdGenerate(modules)
 Deno.writeTextFileSync(config.output, md)
 console.log("Markdown written into: " + config.output)
+
+//Generate JSON
+if(config.json_report){
+    const json = generateJson(modules)
+    Deno.writeTextFileSync(config.json_report, json)
+}
