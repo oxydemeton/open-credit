@@ -7,4 +7,7 @@ export class Module {
     repo?: string
     homepage?: string
     documentation?: string
+    manager?: Manager
 }
+
+export type Manager = "cargo" | "npm"
