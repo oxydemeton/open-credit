@@ -1,7 +1,7 @@
 import { Config } from "../config/Config.ts"
-import { crawlCargoLock } from "../Managers/Cargo.ts";
+import { crawlCargoLock } from "../Managers/Cargo.ts"
 import { Module } from "../Managers/Module.ts"
-import { crawlNodeModules } from "../Managers/Npm.ts";
+import { crawlNodeModules } from "../Managers/Npm.ts"
 import * as FS from "https://deno.land/std@0.181.0/fs/mod.ts"
 
 export async function collectAll(config: Config): Promise<Module[]> {
