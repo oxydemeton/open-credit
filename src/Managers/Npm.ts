@@ -7,7 +7,7 @@ export async function crawlNodeModules(root: string): Promise<Module[]> {
         if (entry.name !== "package.json" || !entry.isFile) continue
 
         const json = JSON.parse(await Deno.readTextFile(entry.path)) as any
-        const mod: Module = {manager: "npm"}
+        const mod: Module = { manager: "npm" }
 
         if (json.author) mod.author = json.author.toString()
         if (json.name) mod.name = json.name.toString()
