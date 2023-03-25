@@ -14,7 +14,7 @@ export async function crawlCargoLock(
     for (let i = 0; i < pack.length; i++) {
         if (!requestCargoApi) {
             const p = pack[i] as any
-            const mod: Module = {manager: "cargo"}
+            const mod: Module = { manager: "cargo" }
             if (p.name) mod.name = p.name.toString()
             if (p.version) mod.version = p.version.toString()
             modules.push(mod)
@@ -39,7 +39,7 @@ export async function crawlCargoLock(
                 modules.push(mod)
                 continue
             }
-            const mod: Module = {manager: "cargo"}
+            const mod: Module = { manager: "cargo" }
             if (crate.name) mod.name = crate.name.toString()
             if (crate.description) {
                 mod.description = crate.description.toString()
