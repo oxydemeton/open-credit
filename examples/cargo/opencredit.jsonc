@@ -1,1 +1,7 @@
-{"output":"CREDITS.md","exclude":[],"allow_api_calls":false, "managers": ["cargo"]}
+{
+  "output": "CREDITS.md",
+  "exclude": [],
+  "allow_api_calls": false,
+  "managers": ["cargo"],
+  "json_report": "credits.json"
+}
