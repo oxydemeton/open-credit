@@ -24,6 +24,25 @@ export function parse(): null | [Command, Args | null] {
         return ["init", { overwrite_config: args.conf }]
     }
     if (args._.includes("run")) {
+        if (args.h) {
+            console.log("Open-credit " + version)
+            console.log("Run:")
+            console.log(
+                "Searches for open source credits and bundles them into an output file.",
+            )
+            console.log("Parameter:")
+            console.log("  -h print help")
+            console.log(
+                "  --conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
+            )
+            console.log(
+                "  --md <file_name> | Specify Output file name. Default: CREDITS.md",
+            )
+            console.log(
+                "  --json <file_name> | Specify if an json output should be given. If empty there is no output.",
+            )
+            return null
+        }
         return [
             "run",
             {
@@ -33,6 +52,33 @@ export function parse(): null | [Command, Args | null] {
             },
         ]
     }
+
+    //Print general Help
+    console.log("Open-credit " + version)
+    console.log("Commands:")
+    console.log("  run:")
+    console.log(
+        "    Searches for open source credits and bundles them into an output file.",
+    )
+    console.log("    Parameter:")
+    console.log("      -h print help")
+    console.log(
+        "      --conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
+    )
+    console.log(
+        "      --md <file_name> | Specify Output file name. Default: CREDITS.md",
+    )
+    console.log(
+        "      --json <file_name> | Specify if an json output should be given. If empty there is no output.",
+    )
+    console.log("")
+    console.log("  init:")
+    console.log("    Creates a default config file.")
+    console.log(
+        "    User --conf <file_name> to specify the name of the config file. Default: opencredit.jsonc",
+    )
+
+    if (!args.h) Deno.exit(1)
     return null
 }
 export interface Args {
