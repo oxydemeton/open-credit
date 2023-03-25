@@ -4,7 +4,7 @@
     },
     "tasks": {
         "run": "deno run --allow-net=crates.io --allow-read=. --allow-write=. src/index.ts run",
-        "compile": "deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target x86_64-pc-windows-msvc --output .target/windows_x64/opencredit.exe src/index.ts & deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target x86_64-unknown-linux-gnu --output .target/linux_x64/opencredit src/index.ts & deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target x86_64-apple-darwin --output .target/macos_x64/opencredit src/index.ts & deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target aarch64-apple-darwin --output .target/apple_aarch64/opencredit.exe src/index.ts",
+        "compile": "deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target x86_64-pc-windows-msvc --output target/windows_x64/opencredit.exe src/index.ts & deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target x86_64-unknown-linux-gnu --output target/linux_x64/opencredit src/index.ts & deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target x86_64-apple-darwin --output target/macos_x64/opencredit src/index.ts & deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target aarch64-apple-darwin --output target/apple_aarch64/opencredit.exe src/index.ts"
     },
     "compilerOptions": {
         "checkJs": true,
