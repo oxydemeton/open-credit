@@ -1,3 +1,4 @@
+import { filterDuplicates } from "../Managers/Filter.ts"
 import { Module } from "../Managers/Module.ts"
 
 export function generate(modules: Module[]): string {
@@ -8,8 +9,10 @@ export function generate(modules: Module[]): string {
         md += txt + "\n"
     }
     const split_modules = separateModules(modules)
+    split_modules.cargo = filterDuplicates(split_modules.cargo)
+    split_modules.npm = filterDuplicates(split_modules.npm)
 
-    writeLine("### Cargo Modules")    
+    writeLine("### Cargo Modules")
     split_modules.cargo.forEach((mod) => {
         writeLine("- " + mod.name)
         if (mod.author) writeLine("    - Author: " + mod.author)
@@ -37,7 +40,9 @@ export function generate(modules: Module[]): string {
     return md
 }
 
-function separateModules(modules: Module[]): {npm: Module[], cargo: Module[]} {
+function separateModules(
+    modules: Module[],
+): { npm: Module[]; cargo: Module[] } {
     const cargoModules: Module[] = []
     const npmModules: Module[] = []
     modules.forEach((mod) => {
