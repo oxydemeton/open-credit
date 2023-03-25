@@ -10,6 +10,31 @@ file.<br> It uses Deno as a typescript runtime.
 3. Run the script in your projects root. Allow Read and if api calls are enabled
    also networking when running `deno` with the `index.ts`
 
+### Installation
+
+#### Windows
+
+1. Download `opencredit_windows_x64.zip`.
+2. Unzip the archive
+3. put `opencredit.exe` into a directory of your choice
+4. add this directory to your system path
+   (https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14))
+5. Restart pc or reload path in PowerShell
+   (https://stackoverflow.com/questions/17794507/reload-the-path-in-powershell)
+6. Use opencredit with the command `opencredit` in your terminal
+
+#### Linux
+
+1. Download `opencredit_linux_x64.gz`
+2. Unzip the file with `gzip -d opencredit_linux_x64.gz`
+3. Add the binaries to the `/usr/bin` folder or add the path to your `$PATH`
+   variable
+
+### Use Deno (universal)
+
+If you have Deno installed, you can use `deno run` to execute the index.ts from
+the `src` directory.
+
 ## Configuration
 
 ### Config File
