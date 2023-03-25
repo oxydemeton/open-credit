@@ -1,5 +1,5 @@
 import { readConfig } from "./config/ReadConfig.ts"
-import { generate as mdGenerate } from "./Markdown/Generator.ts"
+import { generate as mdGenerate } from "./Generators/Md.ts"
 import { collectAll } from "./cli/Collect.ts"
 import { parse as parseArgs } from "./cli/Args.ts"
 import { init as initConfigFile } from "./cli/Init.ts"
