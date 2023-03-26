@@ -18,7 +18,6 @@ export async function crawlDenoImports(
             version: regex.version,
             manager: "deno",
         }
-        console.log(regex)
 
         modules.push(mod)
     })
