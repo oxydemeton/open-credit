@@ -10,4 +10,4 @@ export class Module {
     manager?: Manager
 }
 
-export type Manager = "cargo" | "npm"
+export type Manager = "cargo" | "npm" | "deno"
