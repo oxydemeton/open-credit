@@ -1,5 +1,5 @@
 import { Module } from "./Module.ts"
-import * as Toml from "https://deno.land/std@0.180.0/encoding/toml.ts"
+import { parse } from "https://deno.land/std@0.181.0/encoding/toml.ts"
 
 export async function crawlCargoLock(
     path: string,
@@ -8,7 +8,7 @@ export async function crawlCargoLock(
     const modules: Module[] = []
 
     const cargoLockRaw = await Deno.readTextFile(path)
-    const cargoLock = Toml.parse(cargoLockRaw)
+    const cargoLock = parse(cargoLockRaw)
     if (typeof cargoLock.package !== "object" && cargoLock.package) return []
     const pack = cargoLock.package as Array<object>
     for (let i = 0; i < pack.length; i++) {

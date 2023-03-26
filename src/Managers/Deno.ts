@@ -1,4 +1,3 @@
-import * as FS from "https://deno.land/std@0.181.0/fs/mod.ts"
 import { Module } from "./Module.ts"
 
 export async function crawlDenoImports(

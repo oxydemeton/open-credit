@@ -1,9 +1,9 @@
-import * as FS from "https://deno.land/std@0.181.0/fs/mod.ts"
+import { walk } from "https://deno.land/std@0.181.0/fs/walk.ts"
 import { Module } from "./Module.ts"
 
 export async function crawlNodeModules(root: string): Promise<Module[]> {
     const modules: Module[] = []
-    for await (const entry of FS.walk(root)) {
+    for await (const entry of walk(root)) {
         if (entry.name !== "package.json" || !entry.isFile) continue
 
         const json = JSON.parse(await Deno.readTextFile(entry.path)) as any
