@@ -5,6 +5,7 @@ import { parse as parseArgs } from "./cli/Args.ts"
 import { init as initConfigFile } from "./cli/Init.ts"
 import { generateJson } from "./Generators/Json.ts"
 import { generateStats, statsToString } from "./cli/Stats.ts"
+import { allManagers } from "./Managers/Module.ts"
 
 const args = parseArgs()
 if (args === null) Deno.exit(0)
@@ -12,7 +13,8 @@ if (args[0] === "init") {
     const path = args[1]?.overwrite_config
         ? args[1].overwrite_config
         : "opencredit.jsonc"
-    initConfigFile(path)
+    const managers = args[1]?.overwrite_managers
+    await initConfigFile(path, managers ? managers : allManagers)
     console.log("Created config file: " + path)
     Deno.exit(0)
 }
@@ -22,6 +24,7 @@ const config_path = args[1]?.overwrite_config
 const config = readConfig(config_path)!
 if (args[1]?.overwrite_json) config.json_report = args[1]?.overwrite_json
 if (args[1]?.overwrite_md) config.output = args[1]?.overwrite_md
+if (args[1]?.overwrite_managers) config.managers = args[1]?.overwrite_managers
 
 //Collect Modules
 const modules = await collectAll(config)
@@ -40,5 +43,6 @@ if (args[0] === "run") {
     }
 } else if (args[0] === "stats") {
     console.log("Stats for your project:")
-    console.log(statsToString(generateStats(modules)))
+    const managers = args[1]?.overwrite_managers
+    console.log(statsToString(generateStats(modules, managers? managers : allManagers)))
 }
