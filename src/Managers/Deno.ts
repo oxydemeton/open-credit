@@ -14,12 +14,26 @@ export async function crawlDenoImports(
                 await Deno.readTextFile(entry.path),
             )
             if (reg_res.imports.length <= 0) continue
-            reg_res.imports.forEach((imp) => {
+            reg_res.imports.forEach(async (imp) => {
                 const mod = {
                     name: imp.name,
                     version: imp.version,
                     manager: "deno",
                 } as Module
+                if (requestDenoApi) {
+                    const res = await fetch(
+                        imp.url,
+                    )
+                    if (!res.ok) return
+                    const text = await res.text()
+                    if (text == null) return
+                    const author = text.match(/the (.+?) authors/)?.at(1)
+                    const _years = text.match(/Copyright (\d{4})-(\d{4})/)
+                        ?.slice(1).join("-")
+                    const license = text.match(/(\w+ license)/i)?.at(1)
+                    mod.author = author
+                    mod.license = license
+                }
                 modules.push(mod)
             })
         }
@@ -29,7 +43,7 @@ export async function crawlDenoImports(
 
 class DenoImportRegex {
     static regex =
-        /import[^\n]*from[ ]*"(http[s]*:\/\/[^\n]*\/([^\s]*)@([0-9]+.[0-9]+.[0-9]+)[^\s]*)/gs
+        /import[^\n]*from[ ]*"(http[s]*:\/\/[^\n]*\/([^\s]*)@([0-9]+.[0-9]+.[0-9]+)[^\s]*)"/gs
     imports: DenoImportResult[] = []
     constructor(txt: string) {
         let match
