@@ -66,12 +66,14 @@ The config file is a json or jsonc file for different settings. Default
 ### Commands
 
 - `init`: Creates a new config file. Use `--conf` to specify a non default name
+  and `--managers` for enabled managers in the config
 - `stats`: Print out statistics about dependencies of your project. Requires a
-  config file. Specify a non default config file name with `--conf`.
+  config file. Specify a non default config file name with `--conf` and only
+  enable some managers with `--managers`.
 - `run`: Lists all dependencies in a markdown format. Requires a config file.
   Use `--conf` to specify a non default config file name. Use `--json` to also
   generate a json overview over all dependencies and `--md` to overwrite the
-  output file.
+  output file. `--managers` will overwrite the managers from the config file.
 
 ### Args
 
@@ -80,6 +82,8 @@ When running opencredit you can specify:
 - `--conf` to give a different path/name of the config file
 - `--json` to overwrite the `json_report` path
 - `--md` to overwrite the output of the markdown file
+- `--managers` to overwrite the managers. You can list multiple managers like:
+  npm,deno
 
 ## Examples
 
@@ -92,7 +96,7 @@ the script uses to identify modules.
 - [x] Npm/Pnpm (using node_modules folder). called "npm" in config
 - [x] Cargo (using cargo.lock and optionally cargo api). called "cargo" in
       config
-- [ ] Deno
+- [x] Deno (using deno.lock file)
 - [ ] Comments in files
 - [ ] Special files
 
