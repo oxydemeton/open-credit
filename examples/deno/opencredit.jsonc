@@ -3,6 +3,6 @@
     "exclude": [],
     "allow_api_calls": false,
     "managers": [
-        "npm"
+        "deno"
     ]
 }
