@@ -44,5 +44,9 @@ if (args[0] === "run") {
 } else if (args[0] === "stats") {
     console.log("Stats for your project:")
     const managers = args[1]?.overwrite_managers
-    console.log(statsToString(generateStats(modules, managers? managers : allManagers)))
+    console.log(
+        statsToString(
+            generateStats(modules, managers ? managers : allManagers),
+        ),
+    )
 }

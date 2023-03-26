@@ -1,9 +1,9 @@
-import { assert } from "https://deno.land/std@0.177.0/testing/asserts.ts";
+import { assert } from "https://deno.land/std@0.177.0/testing/asserts.ts"
 import { Module } from "../Managers/Module.ts"
 
 export function splitByManager(
     modules: Module[],
-): { npm: Module[]; cargo: Module[], deno: Module[] } {
+): { npm: Module[]; cargo: Module[]; deno: Module[] } {
     const cargoModules: Module[] = []
     const npmModules: Module[] = []
     const denoModules: Module[] = []
@@ -12,9 +12,9 @@ export function splitByManager(
             cargoModules.push(mod)
         } else if (mod.manager === "npm") {
             npmModules.push(mod)
-        }else if (mod.manager === "deno") {
+        } else if (mod.manager === "deno") {
             denoModules.push(mod)
-        }else {
+        } else {
             assert(false, "Unknown module manager: " + mod.manager)
         }
     })

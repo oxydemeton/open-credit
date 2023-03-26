@@ -18,7 +18,7 @@ export function parse(): null | [Command, Args | null] {
             console.log(
                 "Creates a opencredit.jsonc config with default values.",
             )
-            console.log("Parameter:");
+            console.log("Parameter:")
             console.log("  -h print help")
             console.log(
                 "  --conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
@@ -28,8 +28,13 @@ export function parse(): null | [Command, Args | null] {
             )
             return null
         }
-        const managers = args.managers?.split(",").filter((m) => allManagers.includes(m.toLocaleLowerCase() as Manager)).map(m => m.toLowerCase()) as Manager[]
-        return ["init", { overwrite_config: args.conf, overwrite_managers: managers }]
+        const managers = args.managers?.split(",").filter((m) =>
+            allManagers.includes(m.toLocaleLowerCase() as Manager)
+        ).map((m) => m.toLowerCase()) as Manager[]
+        return ["init", {
+            overwrite_config: args.conf,
+            overwrite_managers: managers,
+        }]
     }
     if (args._.includes("run")) {
         if (args.h) {
@@ -51,26 +56,30 @@ export function parse(): null | [Command, Args | null] {
             )
             console.log(
                 "  --managers <manager1,manager2,...> | Specify which managers should be used. Default: as in config file.",
-            );            
+            )
             return null
         }
-        const managers = args.managers?.split(",").filter((m) => allManagers.includes(m.toLocaleLowerCase() as Manager)).map(m => m.toLowerCase()) as Manager[]
+        const managers = args.managers?.split(",").filter((m) =>
+            allManagers.includes(m.toLocaleLowerCase() as Manager)
+        ).map((m) => m.toLowerCase()) as Manager[]
         return [
             "run",
             {
                 overwrite_json: args.json,
                 overwrite_md: args.md,
                 overwrite_config: args.conf,
-                overwrite_managers: managers
+                overwrite_managers: managers,
             },
         ]
     }
 
     if (args._.includes("stats")) {
-        if(args.h) {
-            console.log("Open-credit " + version);
+        if (args.h) {
+            console.log("Open-credit " + version)
             console.log("Stats:")
-            console.log("Prints statistics about packages/modules/crates used in the project.")
+            console.log(
+                "Prints statistics about packages/modules/crates used in the project.",
+            )
             console.log("Parameter:")
             console.log("  -h print help")
             console.log(
@@ -78,13 +87,15 @@ export function parse(): null | [Command, Args | null] {
             )
             console.log(
                 "  --managers <manager1,manager2,...> | Specify which managers should be used. Default: as in config file.",
-            );
+            )
             return null
         }
-        const managers = args.managers?.split(",").filter((m) => allManagers.includes(m.toLocaleLowerCase() as Manager)).map(m => m.toLowerCase()) as Manager[]
+        const managers = args.managers?.split(",").filter((m) =>
+            allManagers.includes(m.toLocaleLowerCase() as Manager)
+        ).map((m) => m.toLowerCase()) as Manager[]
         return ["stats", {
             overwrite_config: args.conf,
-            overwrite_managers: managers
+            overwrite_managers: managers,
         }]
     }
     //Print general Help
@@ -121,21 +132,23 @@ export function parse(): null | [Command, Args | null] {
 
     console.log("")
     console.log("  stats:")
-    console.log("    Prints statistics about packages/modules/crates used in the project.")
+    console.log(
+        "    Prints statistics about packages/modules/crates used in the project.",
+    )
     console.log(
         "    User --conf <file_name> to specify the name of the config file. Default: opencredit.jsonc",
     )
     console.log(
         "    User --managers <manager1,manager2,...> to specify which managers should be used. Default: as in config file",
     )
-    
+
     if (!args.h) Deno.exit(1)
     return null
 }
 export interface Args {
     overwrite_md?: string
     overwrite_json?: string
-    overwrite_config?: string,
-    overwrite_managers?: Manager[],
+    overwrite_config?: string
+    overwrite_managers?: Manager[]
 }
 export type Command = "run" | "init" | "stats"
