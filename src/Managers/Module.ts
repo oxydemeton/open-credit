@@ -10,4 +10,5 @@ export class Module {
     manager?: Manager
 }
 
-export type Manager = "cargo" | "npm"
+export type Manager = "cargo" | "npm" | "deno"
+export const allManagers = ["cargo", "npm", "deno"] as const

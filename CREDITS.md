@@ -16,3 +16,8 @@
     - Version: 3.0.5
     - License: MIT
     - Description: Seeded random number generator for Javascript.
+### Deno Modules
+- std
+    - Version: 0.177.0
+- jszip
+    - Version: 0.11.0

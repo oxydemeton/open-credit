@@ -3,6 +3,7 @@ import { crawlCargoLock } from "../Managers/Cargo.ts"
 import { Module } from "../Managers/Module.ts"
 import { crawlNodeModules } from "../Managers/Npm.ts"
 import * as FS from "https://deno.land/std@0.181.0/fs/mod.ts"
+import { crawlDenoImports } from "../Managers/Deno.ts"
 
 export async function collectAll(config: Config): Promise<Module[]> {
     const modules: Module[] = []
@@ -23,6 +24,18 @@ export async function collectAll(config: Config): Promise<Module[]> {
                     Array.prototype.push.apply(
                         modules,
                         await crawlCargoLock(entry.path),
+                    )
+                }
+                break
+            case "deno.lock":
+                if (config.managers && !config.managers.includes("deno")) break
+                if (!config.exclude.includes(entry.path) && entry.isFile) {
+                    Array.prototype.push.apply(
+                        modules,
+                        await crawlDenoImports(
+                            entry.path,
+                            config.allow_api_calls,
+                        ),
                     )
                 }
                 break
