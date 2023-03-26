@@ -27,13 +27,19 @@ export async function collectAll(config: Config): Promise<Module[]> {
                     )
                 }
                 break
+            case "deno.lock":
+                if (config.managers && !config.managers.includes("deno")) break
+                if (!config.exclude.includes(entry.path) && entry.isFile) {
+                    Array.prototype.push.apply(
+                        modules,
+                        await crawlDenoImports(
+                            entry.path,
+                            config.allow_api_calls,
+                        ),
+                    )
+                }
+                break
         }
-    }
-    if (config.managers?.includes("deno")) {
-        Array.prototype.push.apply(
-            modules,
-            await crawlDenoImports(".", config.allow_api_calls),
-        )
     }
     return modules
 }
