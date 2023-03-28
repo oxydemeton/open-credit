@@ -37,7 +37,8 @@ export async function crawlNodeModules(
         if (json.license) mod.license = json.license.toString()
         if (json.description) mod.description = json.description.toString()
         if (json.homepage) mod.homepage = json.homepage.toString()
-        writeCache(json.name, hash_now, mod, config)
+        
+        if(config.cache) writeCache(json.name, hash_now, mod, config)
         modules.add(mod)
     }
     return [...modules]
