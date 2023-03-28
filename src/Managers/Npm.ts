@@ -34,9 +34,9 @@ export async function crawlNodeModules(root: string, config: Config): Promise<Mo
 async function readCache(name: string, hash_now: string, config: Config): Promise<Module | undefined> {
     if(!config.cache) return undefined
     try {
-        const cache = JSON.parse(await Deno.readTextFile(Path.join(config.cache, `${name}.json`))) as NpmCache
+        const cache = JSON.parse(await Deno.readTextFile(Path.join(Path.join(config.cache, "npm"), `${name}.json`))) as NpmCache
         if (cache.package_json_md5 !== hash_now){
-            Deno.remove(Path.join(config.cache, `${name}.json`))
+            Deno.remove(Path.join(Path.join(config.cache, "npm"), `${name}.json`))
             return undefined
         }
         return cache.mod
@@ -48,5 +48,5 @@ async function readCache(name: string, hash_now: string, config: Config): Promis
 async function writeCache(name: string, hash_now: string, mod: Module, config: Config): Promise<void> {
     if(!config.cache) return
     const cache: NpmCache = { package_json_md5: hash_now, mod: mod }
-    await Deno.writeTextFile(Path.join(config.cache, `${name}.json`), JSON.stringify(cache), {create: true})
+    await Deno.writeTextFile(Path.join(Path.join(config.cache, "npm"), `${name}.json`), JSON.stringify(cache), {create: true})
 }
