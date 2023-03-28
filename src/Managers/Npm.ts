@@ -17,7 +17,16 @@ export async function crawlNodeModules(
     for await (const entry of walk(root)) {
         if (entry.name !== "package.json" || !entry.isFile) continue
 
-        const json = JSON.parse(await Deno.readTextFile(entry.path)) as any
+        let json = {} as any
+        try {
+            json = JSON.parse(await Deno.readTextFile(entry.path)) as any
+        }catch(error) {
+            console.log("Error while parsing package.json: " + entry.path)
+            console.error(error);
+            
+            continue
+        }
+        
         const mod: Module = { manager: "npm" }
         const hash_now = toHashString(
             await Crypto.crypto.subtle.digest(
