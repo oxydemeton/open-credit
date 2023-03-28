@@ -30,10 +30,10 @@ export async function crawlNodeModules(
         const mod: Module = { manager: "npm" }
         const hash_now = toHashString(
             await Crypto.crypto.subtle.digest(
-                "SHA-256",
+                "MD5",
                 new TextEncoder().encode(JSON.stringify(json)),
             ),
-            "hex",
+            "base64",
         )
         const cache = await readCache(json.name, hash_now, config)
         if (cache) {
@@ -86,8 +86,10 @@ async function writeCache(
 ): Promise<void> {
     if (!config.cache) return
     const cache: NpmCache = { package_json_md5: hash_now, mod: mod }
+    const path = Path.join(Path.join(config.cache, "npm"), `${name}.json`)
+    await Deno.mkdir(Path.dirname(path), { recursive: true })
     await Deno.writeTextFile(
-        Path.join(Path.join(config.cache, "npm"), `${name}.json`),
+        path,
         JSON.stringify(cache),
         { create: true },
     )
