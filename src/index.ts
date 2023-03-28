@@ -8,6 +8,7 @@ import { generateStats, statsToString } from "./cli/Stats.ts"
 import { allManagers } from "./Managers/Module.ts"
 
 const args = parseArgs()
+
 if (args === null) Deno.exit(0)
 if (args[0] === "init") {
     const path = args[1]?.overwrite_config
@@ -25,6 +26,7 @@ const config = readConfig(config_path)!
 if (args[1]?.overwrite_json) config.json_report = args[1]?.overwrite_json
 if (args[1]?.overwrite_md) config.output = args[1]?.overwrite_md
 if (args[1]?.overwrite_managers) config.managers = args[1]?.overwrite_managers
+if (args[1]?.cache !== undefined) config.cache = args[1]?.cache
 
 //Collect Modules
 const modules = await collectAll(config)

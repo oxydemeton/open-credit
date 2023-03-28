@@ -61,6 +61,7 @@ async function readCache(
             )
             return undefined
         }
+        
         return cache.mod
     } catch (error) {
         return undefined
