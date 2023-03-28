@@ -39,7 +39,6 @@ async function readCache(name: string, hash_now: string, config: Config): Promis
             Deno.remove(Path.join(config.cache, `${name}.json`))
             return undefined
         }
-        console.log(`Using cached data for ${name}`);
         return cache.mod
     } catch (error) {
         return undefined
