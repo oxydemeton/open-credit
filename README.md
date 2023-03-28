@@ -3,41 +3,36 @@
 An small open project to search for packages you use and mention them in one
 file.<br> It uses Deno as a typescript runtime.
 
-## How to use
+## Running Opencredit
 
-1. Create a `opencredit.jsonc`
-2. Define your settings if needed
-3. Run the script in your projects root. Allow Read and if api calls are enabled
-   also networking when running `deno` with the `index.ts`
+### Ways to execute
 
-### Installation
+1. Run the latest version directly with deno from github:
 
-#### Windows
+```sh
+$ deno run https://raw.githubusercontent.com/oxydemeton/open-credit/master/src/index.ts
+```
 
-1. Download `opencredit_windows_x64.zip`.
-2. Unzip the archive
-3. put `opencredit.exe` into a directory of your choice
-4. add this directory to your system path
-   (https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14))
-5. Restart pc or reload path in PowerShell
-   (https://stackoverflow.com/questions/17794507/reload-the-path-in-powershell)
-6. Use opencredit with the command `opencredit` in your terminal
+2. Download the source code and execute the `index.ts` file from the src
+   directory. If you are not running windows and want an executable script add
+   `#!/usr/bin/env -S deno run <permissions>` at the top of the `index.ts`.
+   [Permissions list](#permissions)
+3. Install an executable following the
+   [Installation instructions](#installation).
 
-#### Linux
+### Permissions
 
-1. Download `opencredit_linux_x64.gz`
-2. Unzip the file with `gzip -d opencredit_linux_x64.gz`
-3. Add the binaries to the `/usr/bin` folder or add the path to your `$PATH`
-   variable
+- `allow-read=.` allows the script to read everything in the current directory.
+  It won't but needs permission to scan for packages and configs.
+- `allow-write=<output_files>` allows the script to write into the output files
+  (markdown, json). You can also use `allow-write` or `allow-write` with a wider
+  range of permission if you trust the script.
+- `allow-net=crates.io` allows the script to call the [crates.io](crates.io)
+  api. It is needed when using cargo and apis to grant access to this api.
 
-### Use Deno (universal)
+### Configuration
 
-If you have Deno installed, you can use `deno run` to execute the index.ts from
-the `src` directory.
-
-## Configuration
-
-### Config File
+#### Config File
 
 The config file is a json or jsonc file for different settings. Default
 `opencredit.jsonc` created with `init`:
@@ -50,7 +45,7 @@ The config file is a json or jsonc file for different settings. Default
 }
 ```
 
-#### Options:
+##### Options:
 
 - `output`: Path and name of the output markdown file.
 - `exclude`: Which files with path and name to exclude. Folders are not
@@ -113,3 +108,40 @@ The Project is written in TypeScript using deno.<br> Deno was my first choice
 because it does't create a folder for dependencies, supports TypeScript out of
 the box, has a decent standard library and is more stable and has a wider
 support than bun. Also deno allows the project to be bundled and "compiled".
+
+## Installation
+
+### Windows
+
+1. Download `opencredit_windows_x64.zip`.
+2. Unzip the archive
+3. put `opencredit.exe` into a directory of your choice
+4. add this directory to your system path
+   (https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14))
+5. Restart pc or reload path in PowerShell
+   (https://stackoverflow.com/questions/17794507/reload-the-path-in-powershell)
+6. Use opencredit with the command `opencredit` in your terminal
+
+### Linux
+
+1. Download `opencredit_linux_x64.gz`
+2. Unzip the file with:
+
+```sh
+$ gzip -d opencredit_linux_x64.gz`
+```
+
+3. Add the binaries to the `/opt` folder or add the path to your `$PATH`
+   variable
+
+### Compilation
+
+1. Download Source code of you favorite version.
+2. Unzip the archive and go into it
+3. Run
+
+```sh
+$ deno compile <default permissions> src/index.ts
+```
+
+It will automatically select the right format/target for your os and cpu.
