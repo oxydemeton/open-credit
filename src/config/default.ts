@@ -4,4 +4,5 @@ export const defaultConfig: Config = {
     exclude: [],
     json_report: undefined,
     allow_api_calls: false,
+    cache: ".cache",
 }

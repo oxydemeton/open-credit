@@ -5,7 +5,7 @@ import { version } from "./Global.ts"
 export function parse(): null | [Command, Args | null] {
     const args = Flags.parse(Deno.args, {
         boolean: ["v", "h"],
-        string: ["md", "json", "conf", "managers"],
+        string: ["md", "json", "conf", "managers", "cache"],
     })
     if (args.v) { //Version
         console.log(version)
@@ -150,5 +150,6 @@ export interface Args {
     overwrite_json?: string
     overwrite_config?: string
     overwrite_managers?: Manager[]
+    cache?: false | string
 }
 export type Command = "run" | "init" | "stats"
