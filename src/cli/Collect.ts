@@ -14,7 +14,7 @@ export async function collectAll(config: Config): Promise<Module[]> {
                 if (!config.exclude.includes(entry.path) && entry.isDirectory) {
                     Array.prototype.push.apply(
                         modules,
-                        await crawlNodeModules(entry.path),
+                        await crawlNodeModules(entry.path, config),
                     )
                 }
                 break
