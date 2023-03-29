@@ -6,7 +6,7 @@ import { NpmCache } from "../cache/NpmCache.ts"
 import * as Crypto from "https://deno.land/std@0.181.0/crypto/crypto.ts"
 import { toHashString } from "https://deno.land/std@0.181.0/crypto/to_hash_string.ts"
 
-export async function crawlNodeModules(
+export async function crawlNodeModulesOld(
     root: string,
     config: Config,
 ): Promise<Module[]> {
@@ -35,7 +35,7 @@ export async function crawlNodeModules(
             ),
             "base64",
         )
-        const cache = await readCache(json.name, hash_now, config)
+        const cache = await readCacheOld(json.name, hash_now, config)
         if (cache) {
             modules.add(cache)
             continue
@@ -47,13 +47,13 @@ export async function crawlNodeModules(
         if (json.description) mod.description = json.description.toString()
         if (json.homepage) mod.homepage = json.homepage.toString()
         
-        if(config.cache) writeCache(json.name, hash_now, mod, config)
+        if(config.cache) writeCacheOld(json.name, hash_now, mod, config)
         modules.add(mod)
     }
     return [...modules]
 }
 
-async function readCache(
+async function readCacheOld(
     name: string,
     hash_now: string,
     config: Config,
@@ -78,7 +78,7 @@ async function readCache(
     }
 }
 
-async function writeCache(
+async function writeCacheOld(
     name: string,
     hash_now: string,
     mod: Module,
@@ -93,4 +93,35 @@ async function writeCache(
         JSON.stringify(cache),
         { create: true },
     )
+}
+
+export async function crawlNpmLock(
+    path: string,
+    config: Config,
+): Promise<Module[]> {
+    //Read package-lock.json
+    const package_lock = await Deno.readTextFile(path)
+    const json = JSON.parse(package_lock) as any
+    if (!json.packages || json.packages.length === 0) return []
+
+    const modules: Set<Module> = new Set()
+    Object.entries(json.packages).forEach(([key, lock_value]) => {
+        const pack_path = Path.join(Path.dirname(path), key)
+        const pack_json = JSON.parse(Deno.readTextFileSync(Path.join(pack_path, "package.json")))
+        modules.add(parsePackageJson(pack_json))        
+    })
+    console.log(modules);
+
+    return [...modules]
+}
+
+function parsePackageJson(json: any): Module {
+    const mod: Module = { manager: "npm" }
+    if (json.author) mod.author = json.author.toString()
+    if (json.name) mod.name = json.name.toString()
+    if (json.version) mod.version = json.version.toString()
+    if (json.license) mod.license = json.license.toString()
+    if (json.description) mod.description = json.description.toString()
+    if (json.homepage) mod.homepage = json.homepage.toString()
+    return mod
 }

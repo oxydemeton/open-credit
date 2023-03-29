@@ -1,7 +1,7 @@
 import { Config } from "../config/Config.ts"
 import { crawlCargoLock } from "../Managers/Cargo.ts"
 import { Module } from "../Managers/Module.ts"
-import { crawlNodeModules } from "../Managers/Npm.ts"
+import { crawlNpmLock } from "../Managers/Npm.ts"
 import { walk } from "https://deno.land/std@0.181.0/fs/walk.ts"
 import { crawlDenoImports } from "../Managers/Deno.ts"
 
@@ -9,12 +9,12 @@ export async function collectAll(config: Config): Promise<Module[]> {
     const modules: Module[] = []
     for await (const entry of walk(".")) {
         switch (entry.name) {
-            case "node_modules":
+            case "package-lock.json":
                 if (config.managers && !config.managers.includes("npm")) break
-                if (!config.exclude.includes(entry.path) && entry.isDirectory) {
+                if (!config.exclude.includes(entry.path) && entry.isFile) {
                     Array.prototype.push.apply(
                         modules,
-                        await crawlNodeModules(entry.path, config),
+                        await crawlNpmLock(entry.path, config),
                     )
                 }
                 break
