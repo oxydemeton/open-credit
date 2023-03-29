@@ -69,7 +69,7 @@ export function parse(): null | [Command, Args | null] {
                 overwrite_md: args.md,
                 overwrite_config: args.conf,
                 overwrite_managers: managers,
-                cache: args.cache === "false"? false : args.cache,
+                cache: args.cache === "false" ? false : args.cache,
             },
         ]
     }
@@ -97,7 +97,7 @@ export function parse(): null | [Command, Args | null] {
         return ["stats", {
             overwrite_config: args.conf,
             overwrite_managers: managers,
-            cache: args.cache === "false"? false : args.cache,
+            cache: args.cache === "false" ? false : args.cache,
         }]
     }
     //Print general Help

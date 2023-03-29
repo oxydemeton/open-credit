@@ -43,7 +43,8 @@ export function parseConfig(txt: string): Config {
         config.cache = false
     } else if (json.cache !== undefined && json.cache !== true) {
         console.error(
-            'Config Error: "cache" is of type ' + typeof json.cache + " but type string or bool is expected.",
+            'Config Error: "cache" is of type ' + typeof json.cache +
+                " but type string or bool is expected.",
         )
     }
     if (json.managers) {
