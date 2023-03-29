@@ -141,12 +141,24 @@ export async function crawlNpmLock(
 
 function parsePackageJson(json: any): Module {
     const mod: Module = { manager: "npm" }
-    if (json.author) mod.author = json.author.toString()
     if (json.name) mod.name = json.name.toString()
-    if (json.version) mod.version = json.version.toString()
-    if (json.license) mod.license = json.license.toString()
+    if (json.author){
+        if(typeof json.author === "string") mod.author = json.author.toString();
+        else if(typeof json.author === "object") mod.author = JSON.stringify(json.author);
+    } 
+    if (json.version) {
+        if(typeof json.version === "string") mod.version = json.version.toString();
+        else if(typeof json.version === "object") mod.version = JSON.stringify(json.version);
+    }
+    if (json.license) {
+        if(typeof json.license === "string") mod.license = json.license.toString();
+        else if(typeof json.license === "object") mod.license = JSON.stringify(json.license);
+    }
     if (json.description) mod.description = json.description.toString()
-    if (json.homepage) mod.homepage = json.homepage.toString()
+    if (json.homepage) {
+        if(typeof json.homepage === "string") mod.homepage = json.homepage.toString();
+        else if(typeof json.homepage === "object") mod.homepage = JSON.stringify(json.homepage);
+    }
     return mod
 }
 
