@@ -6,5 +6,5 @@
     "managers": [ //List of all managers in use. If not set all will be used. Names are case insensitive
         "deno"
     ],
-    "cache": false
+    "cache": "./.cache"
 }
