@@ -128,7 +128,7 @@ checksums to revalidate when needed.<br> Performance difference is minimal when
 reading or writing cache!<br> BUT when api calls for cargo are enabled traffic
 is minimized and performance is improved.<br>
 
-#### Test case [surrealdb](https://github.com/surrealdb/surrealdb)
+#### Test case [surrealdb](https://github.com/surrealdb/surrealdb)(475 crates)
 
 Comparison on Windows11 with `stats` command and `api calls enabled`:<br>
 Without cache:
