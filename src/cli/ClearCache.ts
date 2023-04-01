@@ -5,6 +5,10 @@ export async function clearCache(conf: Config) {
     const cache = conf.cache
 
     if (cache) {
-        Deno.removeSync(cache, { recursive: true })
+        try {
+            Deno.removeSync(cache, { recursive: true })
+        }catch (error) {
+            console.error("Unable to clear cache")
+        }
     }
 }
