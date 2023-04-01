@@ -1,0 +1,9 @@
+{
+    "output": "CREDITS.md",
+    "exclude": [],
+    "allow_api_calls": false,
+    "cache": false,
+    "managers": [
+        "pnpm"
+    ]
+}

@@ -138,7 +138,7 @@ export async function crawlNpmLock(
     return [...modules]
 }
 
-function parsePackageJson(json: any): Module {
+export function parsePackageJson(json: any): Module {
     const mod: Module = { manager: "npm" }
     if (json.name) mod.name = json.name.toString()
     if (json.author) {

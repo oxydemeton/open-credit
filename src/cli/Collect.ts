@@ -4,6 +4,7 @@ import { Module } from "../Managers/Module.ts"
 import { crawlNpmLock } from "../Managers/Npm.ts"
 import { walk } from "https://deno.land/std@0.181.0/fs/walk.ts"
 import { crawlDenoImports } from "../Managers/Deno.ts"
+import { crawlPnpmLock } from "../Managers/Pnpm.ts"
 
 export async function collectAll(config: Config): Promise<Module[]> {
     const modules: Module[] = []
@@ -15,6 +16,15 @@ export async function collectAll(config: Config): Promise<Module[]> {
                     Array.prototype.push.apply(
                         modules,
                         await crawlNpmLock(entry.path, config),
+                    )
+                }
+                break
+            case "pnpm-lock.yaml":
+                if (config.managers && !config.managers.includes("pnpm")) break
+                if (!config.exclude.includes(entry.path) && entry.isFile) {
+                    Array.prototype.push.apply(
+                        modules,
+                        [...await crawlPnpmLock(entry.path, config)],
                     )
                 }
                 break
@@ -41,5 +51,7 @@ export async function collectAll(config: Config): Promise<Module[]> {
                 break
         }
     }
+    console.log(modules);
+    
     return modules
 }
