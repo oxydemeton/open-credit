@@ -96,7 +96,8 @@ the script uses to identify modules.
 - [x] Pnpm (using pnpm-lock.yaml). called "pnpm" in config and found modules are collected as npm modules in outputs.
 - [x] Cargo (using cargo.lock and optionally cargo api). called "cargo" in
       config
-- [x] Deno (using deno.lock file)
+- [x] Deno (using deno.lock file and optionally [deno api](https://apiland.deno.dev/)). called "deno" in
+      config
 - [ ] Yarn
 - [ ] Comments in files
 - [ ] Special files
