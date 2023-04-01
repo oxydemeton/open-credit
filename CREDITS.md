@@ -20,6 +20,7 @@
     - Version: 3.0.5
     - License: MIT
     - Description: Seeded random number generator for Javascript.
+    - Homepage: http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html
 ### Deno Modules
 - std
     - Version: 0.177.0
