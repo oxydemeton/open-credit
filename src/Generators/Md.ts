@@ -2,7 +2,7 @@ import { filterDuplicates } from "../Managers/Filter.ts"
 import { Module } from "../Managers/Module.ts"
 import { splitByManager } from "./Split.ts"
 
-export function generate(modules: Module[]): string {
+export function generate(modules: Set<Module>): string {
     let md = "# Mentions\n"
     md += "## Modules\n"
 

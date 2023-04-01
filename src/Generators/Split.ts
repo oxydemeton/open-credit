@@ -2,7 +2,7 @@ import { assert } from "https://deno.land/std@0.177.0/testing/asserts.ts"
 import { Module } from "../Managers/Module.ts"
 
 export function splitByManager(
-    modules: Module[],
+    modules: Set<Module>,
 ): { npm: Module[]; cargo: Module[]; deno: Module[] } {
     const cargoModules: Module[] = []
     const npmModules: Module[] = []

@@ -6,8 +6,8 @@ import { walk } from "https://deno.land/std@0.181.0/fs/walk.ts"
 import { crawlDenoImports } from "../Managers/Deno.ts"
 import { crawlPnpmLock } from "../Managers/Pnpm.ts"
 
-export async function collectAll(config: Config): Promise<Module[]> {
-    const modules: Module[] = []
+export async function collectAll(config: Config): Promise<Set<Module>> {
+    const modules: Set<Module> = new Set()
     for await (const entry of walk(".")) {
         switch (entry.name) {
             case "package-lock.json":
