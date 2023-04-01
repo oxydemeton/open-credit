@@ -1,10 +1,10 @@
-import { walk } from "https://deno.land/std@0.181.0/fs/walk.ts"
+import { walk } from "std/fs/walk.ts"
 import { Module } from "./Module.ts"
 import { Config } from "../config/Config.ts"
-import * as Path from "https://deno.land/std@0.181.0/path/mod.ts"
+import * as Path from "std/path/mod.ts"
 import { NpmCache, NpmCacheOld } from "../cache/NpmCache.ts"
-import * as Crypto from "https://deno.land/std@0.181.0/crypto/crypto.ts"
-import { toHashString } from "https://deno.land/std@0.181.0/crypto/to_hash_string.ts"
+import * as Crypto from "std/crypto/crypto.ts"
+import { toHashString } from "std/crypto/to_hash_string.ts"
 
 export async function crawlNodeModulesOld(
     root: string,

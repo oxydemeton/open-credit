@@ -1,5 +1,5 @@
 import { Config } from "../config/Config.ts"
-import * as Path from "https://deno.land/std@0.181.0/path/mod.ts"
+import * as Path from "std/path/mod.ts"
 
 export async function clearCache(conf: Config) {
     const cache = conf.cache

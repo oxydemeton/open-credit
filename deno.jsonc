@@ -1,6 +1,6 @@
 {
     "imports": {
-        "std/": "https://deno.land/std@0.179.0/"
+        "std/": "https://deno.land/std@0.182.0/"
     },
     "tasks": {
         "run": "deno run --allow-net=crates.io,apiland.deno.dev --allow-read=. --allow-write=. src/index.ts run",

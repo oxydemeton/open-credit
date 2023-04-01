@@ -1,4 +1,4 @@
-import { parse } from "https://deno.land/std@0.181.0/jsonc/parse.ts"
+import { parse } from "std/jsonc/parse.ts"
 import { Config } from "./Config.ts"
 import { defaultConfig } from "./default.ts"
 
