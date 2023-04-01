@@ -20,11 +20,10 @@ export async function crawlCargoLock(
         if (checksum) {
             const cache = await readCache(p.name, checksum, config)
             if (cache !== undefined) {
-                console.log("Using cached module: " + p.name);
                 modules.push(cache)
                 continue
             }
-        }else continue;
+        } else continue
         if (!config.allow_api_calls) {
             const mod: Module = { manager: "cargo" }
             if (p.name) mod.name = p.name.toString()
@@ -48,8 +47,7 @@ async function crateRequest(
 ): Promise<Module | null> {
     mod_base.manager = "cargo"
     if (!mod_base.name) return null
-    console.log("Fetching module: " + mod_base.name);
-    
+
     const response = await fetch(
         "https://crates.io/api/v1/crates/" + mod_base.name,
     )
