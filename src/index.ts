@@ -6,6 +6,7 @@ import { init as initConfigFile } from "./cli/Init.ts"
 import { generateJson } from "./Generators/Json.ts"
 import { generateStats, statsToString } from "./cli/Stats.ts"
 import { allManagers } from "./Managers/Module.ts"
+import { clearCache } from "./cli/ClearCache.ts"
 
 const args = parseArgs()
 
@@ -27,6 +28,11 @@ if (args[1]?.overwrite_json) config.json_report = args[1]?.overwrite_json
 if (args[1]?.overwrite_md) config.output = args[1]?.overwrite_md
 if (args[1]?.overwrite_managers) config.managers = args[1]?.overwrite_managers
 if (args[1]?.cache !== undefined) config.cache = args[1]?.cache
+
+if(args[0] === "clear-cache") {
+    await clearCache(config)
+    Deno.exit(0)
+}
 
 //Collect Modules
 const modules = await collectAll(config)

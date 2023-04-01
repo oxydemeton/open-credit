@@ -100,6 +100,35 @@ export function parse(): null | [Command, Args | null] {
             cache: args.cache === "false" ? false : args.cache,
         }]
     }
+    if(args._.includes("clear-cache")){
+        if (args.h) {
+            console.log("Open-credit " + version)
+            console.log("Clear-cache:")
+            console.log(
+                "Clears the cache for the given managers.",
+            )
+            console.log("Parameter:")
+            console.log("  -h print help")
+            console.log(
+                "  --conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
+            );
+            
+            console.log(
+                "  --managers <manager1,manager2,...> | Specify which managers should be used. Default: as in config file.",
+            )
+            console.log(
+                "  --cache <cache_path> | Specify the path to the cache. Default: as in config file."
+            );
+            
+            return null
+        }
+        const managers = args.managers?.split(",").filter((m) =>
+            allManagers.includes(m.toLocaleLowerCase() as Manager)
+        ).map((m) => m.toLowerCase()) as Manager[]
+        return ["clear-cache", {
+            overwrite_managers: managers,
+        }]
+    }
     //Print general Help
     console.log("Open-credit " + version)
     console.log("Commands:")
@@ -144,6 +173,21 @@ export function parse(): null | [Command, Args | null] {
         "    User --managers <manager1,manager2,...> to specify which managers should be used. Default: as in config file",
     )
 
+    console.log("")
+    console.log("  clear-cache:")
+    console.log(
+        "    Clears the cache for the given managers.",
+    )
+    console.log(
+        "    User --conf <file_name> to specify the name of the config file. Default: opencredit.jsonc",
+    )
+    console.log(
+        "    User --managers <manager1,manager2,...> to specify which managers should be used. Default: as in config file",
+    )
+    console.log(
+        "    User --cache <cache_path> to specify the path to the cache. Default: as in config file",
+    )
+
     if (!args.h) Deno.exit(1)
     return null
 }
@@ -154,4 +198,4 @@ export interface Args {
     overwrite_managers?: Manager[]
     cache?: false | string
 }
-export type Command = "run" | "init" | "stats"
+export type Command = "run" | "init" | "stats" | "clear-cache"
