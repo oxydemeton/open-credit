@@ -172,7 +172,7 @@ export function parsePackageJson(json: any): Module {
     return mod
 }
 
-async function readCache(
+export async function readCache(
     path: string,
     integrity: string,
     config: Config,
@@ -194,7 +194,7 @@ async function readCache(
     }
 }
 
-async function writeCache(
+export async function writeCache(
     path: string,
     integrity: string,
     mod: Module,
