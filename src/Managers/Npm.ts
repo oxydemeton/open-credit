@@ -98,11 +98,11 @@ async function writeCacheOld(
 export async function crawlNpmLock(
     path: string,
     config: Config,
-): Promise<Module[]> {
+): Promise<Set<Module>> {
     //Read package-lock.json
     const package_lock = await Deno.readTextFile(path)
     const json = JSON.parse(package_lock) as any
-    if (!json.packages || json.packages.length === 0) return []
+    if (!json.packages || json.packages.length === 0) return new Set()
 
     const modules: Set<Module> = new Set()
 
@@ -135,7 +135,7 @@ export async function crawlNpmLock(
             }
         }
     }
-    return [...modules]
+    return modules
 }
 
 export function parsePackageJson(json: any): Module {
