@@ -13,28 +13,43 @@ export async function collectAll(config: Config): Promise<Set<Module>> {
             case "package-lock.json":
                 if (config.managers && !config.managers.includes("npm")) break
                 if (!config.exclude.includes(entry.path) && entry.isFile) {
-                    modules = new Set([...modules, ...await crawlNpmLock(entry.path, config)])
+                    modules = new Set([
+                        ...modules,
+                        ...await crawlNpmLock(entry.path, config),
+                    ])
                 }
                 break
             case "pnpm-lock.yaml":
                 if (config.managers && !config.managers.includes("pnpm")) break
                 if (!config.exclude.includes(entry.path) && entry.isFile) {
-                    modules = new Set([...modules, ...await crawlPnpmLock(entry.path, config)])
+                    modules = new Set([
+                        ...modules,
+                        ...await crawlPnpmLock(entry.path, config),
+                    ])
                 }
                 break
             case "Cargo.lock":
                 if (config.managers && !config.managers.includes("cargo")) break
                 if (!config.exclude.includes(entry.path) && entry.isFile) {
-                    modules = new Set([...modules, ...await crawlCargoLock(entry.path, config)])
+                    modules = new Set([
+                        ...modules,
+                        ...await crawlCargoLock(entry.path, config),
+                    ])
                 }
                 break
             case "deno.lock":
                 if (config.managers && !config.managers.includes("deno")) break
                 if (!config.exclude.includes(entry.path) && entry.isFile) {
-                    modules = new Set([...modules, ...await crawlDenoImports(entry.path, config.allow_api_calls)])
+                    modules = new Set([
+                        ...modules,
+                        ...await crawlDenoImports(
+                            entry.path,
+                            config.allow_api_calls,
+                        ),
+                    ])
                 }
                 break
         }
-    }    
+    }
     return modules
 }
