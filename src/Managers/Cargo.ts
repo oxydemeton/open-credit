@@ -1,8 +1,8 @@
 import { CargoCache } from "../cache/CargoCache.ts"
 import { Config } from "../config/Config.ts"
 import { Module } from "./Module.ts"
-import { parse } from "https://deno.land/std@0.181.0/encoding/toml.ts"
-import * as Path from "https://deno.land/std@0.181.0/path/mod.ts"
+import { parse } from "std/encoding/toml.ts"
+import * as Path from "std/path/mod.ts"
 
 export async function crawlCargoLock(
     path: string,

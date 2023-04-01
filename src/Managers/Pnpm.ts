@@ -1,6 +1,6 @@
 import { Config } from "../config/Config.ts"
-import * as Yaml from "https://deno.land/std@0.182.0/yaml/mod.ts"
-import * as Path from "https://deno.land/std@0.181.0/path/mod.ts"
+import * as Yaml from "std/yaml/mod.ts"
+import * as Path from "std/path/mod.ts"
 import { Module } from "./Module.ts"
 import { parsePackageJson, readCache, writeCache } from "./Npm.ts"
 
