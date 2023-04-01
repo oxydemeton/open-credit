@@ -73,7 +73,7 @@ export function parse(): null | [Commands, Args | null] {
             cache: args.cache === "false" ? false : args.cache,
         }]
     }
-    if(args._[0] == "clear-cache"){
+    if (args._[0] == "clear-cache") {
         if (args.h) {
             console.log("Open-credit " + version)
             commandHelp(commands.get("clear-cache")!, "clear-cache")
@@ -90,8 +90,8 @@ export function parse(): null | [Commands, Args | null] {
     console.log("Open-credit " + version)
     console.log("Commands:")
     commands.forEach((cmd, name) => {
-        commandHelp(cmd, name, 2)     
-    });
+        commandHelp(cmd, name, 2)
+    })
 
     if (!args.h) Deno.exit(1)
     return null
@@ -105,11 +105,11 @@ export interface Args {
 }
 
 function commandHelp(cmd: Command, name: string, indent = 0) {
-    console.log(" ".repeat(indent) + `${name}:`);
-    console.log(" ".repeat(indent) + `  ${cmd.description}`);
-    console.log(" ".repeat(indent) + `  Parameter:`);
-    cmd.parameters.forEach(param => {
-        console.log(" ".repeat(indent) + `    ${param}`);
+    console.log(" ".repeat(indent) + `${name}:`)
+    console.log(" ".repeat(indent) + `  ${cmd.description}`)
+    console.log(" ".repeat(indent) + `  Parameter:`)
+    cmd.parameters.forEach((param) => {
+        console.log(" ".repeat(indent) + `    ${param}`)
     })
-    console.log("");        
+    console.log("")
 }

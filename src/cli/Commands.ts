@@ -5,7 +5,8 @@ export interface Command {
 export type Commands = "run" | "init" | "stats" | "clear-cache"
 export const commands: Map<Commands, Command> = new Map([
     ["run", {
-        description: "Collect informations about used packages/modules/crates and write them to a markdown file.",
+        description:
+            "Collect informations about used packages/modules/crates and write them to a markdown file.",
         parameters: [
             "-h | Print help",
             "--conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
@@ -24,7 +25,8 @@ export const commands: Map<Commands, Command> = new Map([
         ],
     }],
     ["stats", {
-        description: "Prints statistics about packages/modules/crates used in the project.",
+        description:
+            "Prints statistics about packages/modules/crates used in the project.",
         parameters: [
             "-h | Print help",
             "--conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
@@ -40,5 +42,5 @@ export const commands: Map<Commands, Command> = new Map([
             "--managers <manager1,manager2,...> | Specify which managers should be used. Default: as in config file",
             "--cache <cache_path> | Specify the path to the cache. Default: as in config file",
         ],
-    }]
+    }],
 ])

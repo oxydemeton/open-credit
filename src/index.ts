@@ -29,7 +29,7 @@ if (args[1]?.overwrite_md) config.output = args[1]?.overwrite_md
 if (args[1]?.overwrite_managers) config.managers = args[1]?.overwrite_managers
 if (args[1]?.cache !== undefined) config.cache = args[1]?.cache
 
-if(args[0] === "clear-cache") {
+if (args[0] === "clear-cache") {
     await clearCache(config)
     Deno.exit(0)
 }
