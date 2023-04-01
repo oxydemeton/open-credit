@@ -1,17 +1,18 @@
 import * as Flags from "https://deno.land/std@0.181.0/flags/mod.ts"
 import { allManagers, Manager } from "../Managers/Module.ts"
 import { version } from "./Global.ts"
+import { Command, Commands, commands } from "./Commands.ts"
 
-export function parse(): null | [Command, Args | null] {
+export function parse(): null | [Commands, Args | null] {
     const args = Flags.parse(Deno.args, {
         boolean: ["v", "h"],
         string: ["md", "json", "conf", "managers", "cache"],
     })
     if (args.v) { //Version
-        console.log(version)
+        console.log("Open-credit " + version)
         return null
     }
-    if (args._.includes("init")) {
+    if (args._[0] == "init") {
         if (args.h) {
             console.log("Open-credit " + version)
             console.log("Init:")
@@ -36,27 +37,10 @@ export function parse(): null | [Command, Args | null] {
             overwrite_managers: managers,
         }]
     }
-    if (args._.includes("run")) {
+    if (args._[0] == "run") {
         if (args.h) {
             console.log("Open-credit " + version)
-            console.log("Run:")
-            console.log(
-                "Searches for open source credits and bundles them into an output file.",
-            )
-            console.log("Parameter:")
-            console.log("  -h print help")
-            console.log(
-                "  --conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
-            )
-            console.log(
-                "  --md <file_name> | Specify Output file name. Default: CREDITS.md",
-            )
-            console.log(
-                "  --json <file_name> | Specify if an json output should be given. If empty there is no output.",
-            )
-            console.log(
-                "  --managers <manager1,manager2,...> | Specify which managers should be used. Default: as in config file.",
-            )
+            commandHelp(commands.get("run")!, "clear-cache")
             return null
         }
         const managers = args.managers?.split(",").filter((m) =>
@@ -74,21 +58,10 @@ export function parse(): null | [Command, Args | null] {
         ]
     }
 
-    if (args._.includes("stats")) {
+    if (args._[0] == "stats") {
         if (args.h) {
             console.log("Open-credit " + version)
-            console.log("Stats:")
-            console.log(
-                "Prints statistics about packages/modules/crates used in the project.",
-            )
-            console.log("Parameter:")
-            console.log("  -h print help")
-            console.log(
-                "  --conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
-            )
-            console.log(
-                "  --managers <manager1,manager2,...> | Specify which managers should be used. Default: as in config file.",
-            )
+            commandHelp(commands.get("stats")!, "clear-cache")
             return null
         }
         const managers = args.managers?.split(",").filter((m) =>
@@ -100,26 +73,10 @@ export function parse(): null | [Command, Args | null] {
             cache: args.cache === "false" ? false : args.cache,
         }]
     }
-    if(args._.includes("clear-cache")){
+    if(args._[0] == "clear-cache"){
         if (args.h) {
             console.log("Open-credit " + version)
-            console.log("Clear-cache:")
-            console.log(
-                "Clears the cache for the given managers.",
-            )
-            console.log("Parameter:")
-            console.log("  -h print help")
-            console.log(
-                "  --conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
-            );
-            
-            console.log(
-                "  --managers <manager1,manager2,...> | Specify which managers should be used. Default: as in config file.",
-            )
-            console.log(
-                "  --cache <cache_path> | Specify the path to the cache. Default: as in config file."
-            );
-            
+            commandHelp(commands.get("clear-cache")!, "clear-cache")
             return null
         }
         const managers = args.managers?.split(",").filter((m) =>
@@ -132,61 +89,9 @@ export function parse(): null | [Command, Args | null] {
     //Print general Help
     console.log("Open-credit " + version)
     console.log("Commands:")
-    console.log("  run:")
-    console.log(
-        "    Searches for open source credits and bundles them into an output file.",
-    )
-    console.log("    Parameter:")
-    console.log("      -h print help")
-    console.log(
-        "      --conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
-    )
-    console.log(
-        "      --md <file_name> | Specify Output file name. Default: CREDITS.md",
-    )
-    console.log(
-        "      --json <file_name> | Specify if an json output should be given. If empty there is no output.",
-    )
-    console.log(
-        "      --managers <manager1,manager2,...> | Specify which managers should be used. Default: as in config file.",
-    )
-
-    console.log("")
-    console.log("  init:")
-    console.log("    Creates a default config file.")
-    console.log(
-        "    User --conf <file_name> to specify the name of the config file. Default: opencredit.jsonc",
-    )
-    console.log(
-        "    User --managers <manager1,manager2,...> to specify which managers should be used. Default: cargo,npm,deno",
-    )
-
-    console.log("")
-    console.log("  stats:")
-    console.log(
-        "    Prints statistics about packages/modules/crates used in the project.",
-    )
-    console.log(
-        "    User --conf <file_name> to specify the name of the config file. Default: opencredit.jsonc",
-    )
-    console.log(
-        "    User --managers <manager1,manager2,...> to specify which managers should be used. Default: as in config file",
-    )
-
-    console.log("")
-    console.log("  clear-cache:")
-    console.log(
-        "    Clears the cache for the given managers.",
-    )
-    console.log(
-        "    User --conf <file_name> to specify the name of the config file. Default: opencredit.jsonc",
-    )
-    console.log(
-        "    User --managers <manager1,manager2,...> to specify which managers should be used. Default: as in config file",
-    )
-    console.log(
-        "    User --cache <cache_path> to specify the path to the cache. Default: as in config file",
-    )
+    commands.forEach((cmd, name) => {
+        commandHelp(cmd, name, 2)     
+    });
 
     if (!args.h) Deno.exit(1)
     return null
@@ -198,4 +103,13 @@ export interface Args {
     overwrite_managers?: Manager[]
     cache?: false | string
 }
-export type Command = "run" | "init" | "stats" | "clear-cache"
+
+function commandHelp(cmd: Command, name: string, indent = 0) {
+    console.log(" ".repeat(indent) + `${name}:`);
+    console.log(" ".repeat(indent) + `  ${cmd.description}`);
+    console.log(" ".repeat(indent) + `  Parameter:`);
+    cmd.parameters.forEach(param => {
+        console.log(" ".repeat(indent) + `    ${param}`);
+    })
+    console.log("");        
+}
