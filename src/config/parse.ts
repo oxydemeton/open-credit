@@ -37,6 +37,16 @@ export function parseConfig(txt: string): Config {
                 typeof json.allow_api_calls + " but type boolean is expected.",
         )
     }
+    if (typeof json.cache === "string") {
+        config.cache = json.cache
+    } else if (json.cache === false) {
+        config.cache = false
+    } else if (json.cache !== undefined && json.cache !== true) {
+        console.error(
+            'Config Error: "cache" is of type ' + typeof json.cache +
+                " but type string or bool is expected.",
+        )
+    }
     if (json.managers) {
         config.managers = json.managers
         if (config.managers && config.managers.length) {

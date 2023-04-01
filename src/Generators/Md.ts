@@ -38,6 +38,7 @@ export function generate(modules: Module[]): string {
         if (mod.documentation) {
             writeLine("    - Documentation: " + mod.documentation)
         }
+        if (mod.homepage) writeLine("    - Homepage: " + mod.homepage)
     })
     if (split_modules.deno.length > 0) writeLine("### Deno Modules")
     split_modules.deno.forEach((mod) => {
