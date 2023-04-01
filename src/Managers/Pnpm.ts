@@ -21,10 +21,8 @@ export async function crawlPnpmLock(
         const name = name_regex.exec(key)?.at(1)
         const version_regex = /[\/]?[^\/]+\/([0-9]+.[0-9]+.[0-9]+)/gi
         const version = version_regex.exec(key)?.at(1)
-        console.log(key);
         
         if (!name || !version) continue
-        console.log(yml.packages[key]);
         const integrity = yml.packages[key].resolution?.integrity
         if(!integrity) continue
         const cache = await readCache(
