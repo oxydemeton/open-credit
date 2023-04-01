@@ -3,11 +3,11 @@
         "std/": "https://deno.land/std@0.179.0/"
     },
     "tasks": {
-        "run": "deno run --allow-net=crates.io,deno.land --allow-read=. --allow-write=. src/index.ts run",
+        "run": "deno run --allow-net=crates.io,apiland.deno.dev --allow-read=. --allow-write=. src/index.ts run",
         "clear-credit-cache": "deno run --allow-read=. --allow-write=. src/index.ts clear-cache",
         "cache_deno": "deno cache ./src/index.ts",
-        "stats": "deno run --allow-net=crates.io,deno.land --allow-read=. src/index.ts stats",
-        "compile": "deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target x86_64-pc-windows-msvc --output target/windows_x64/opencredit.exe src/index.ts & deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target x86_64-unknown-linux-gnu --output target/linux_x64/opencredit src/index.ts & deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target x86_64-apple-darwin --output target/apple_x64/opencredit src/index.ts & deno compile --allow-net=crates.io --allow-read=. --allow-write=. --target aarch64-apple-darwin --output target/apple_aarch64/opencredit src/index.ts"
+        "stats": "deno run --allow-net=crates.io,apiland.deno.dev --allow-read=. src/index.ts stats",
+        "compile": "deno compile --allow-net=crates.io,apiland.deno.dev --allow-read=. --allow-write=. --target x86_64-pc-windows-msvc --output target/windows_x64/opencredit.exe src/index.ts & deno compile --allow-net=crates.io,apiland.deno.dev --allow-read=. --allow-write=. --target x86_64-unknown-linux-gnu --output target/linux_x64/opencredit src/index.ts & deno compile --allow-net=crates.io,apiland.deno.dev --allow-read=. --allow-write=. --target x86_64-apple-darwin --output target/apple_x64/opencredit src/index.ts & deno compile --allow-net=crates.io,apiland.deno.dev --allow-read=. --allow-write=. --target aarch64-apple-darwin --output target/apple_aarch64/opencredit src/index.ts"
     },
     "compilerOptions": {
         "checkJs": true,
