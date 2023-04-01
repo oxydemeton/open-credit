@@ -68,6 +68,7 @@ async function readCache(
     config: Config,
     ): Promise<Module | undefined> {
     if (!config.cache) return undefined
+    path = path.replace(/[/\\?%*:|"<>]/g, '-');
     const cachePath = Path.join(config.cache, "deno", path)
     const cacheModPath = Path.join(cachePath, "mod.json")
     try {
@@ -87,6 +88,7 @@ async function writeCache(
     config: Config,
 ) {
     if (!config.cache) return
+    path = path.replace(/[/\\?%*:|"<>]/g, '-');
     const cache: DenoCache = { version, mod }
     const cachePath = Path.join(config.cache, "deno", path)
     const cacheModPath = Path.join(cachePath, "mod.json")
