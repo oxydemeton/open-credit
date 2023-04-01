@@ -23,7 +23,7 @@ export async function collectAll(config: Config): Promise<Module[]> {
                 if (!config.exclude.includes(entry.path) && entry.isFile) {
                     Array.prototype.push.apply(
                         modules,
-                        await crawlCargoLock(entry.path, config.allow_api_calls),
+                        await crawlCargoLock(entry.path, config),
                     )
                 }
                 break
