@@ -44,7 +44,7 @@ export async function collectAll(config: Config): Promise<Set<Module>> {
                         ...modules,
                         ...await crawlDenoImports(
                             entry.path,
-                            config.allow_api_calls,
+                            config,
                         ),
                     ])
                 }
