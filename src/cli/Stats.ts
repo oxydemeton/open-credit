@@ -2,7 +2,7 @@ import { splitByManager } from "../Generators/Split.ts"
 import { allManagers, Manager, Module } from "../Managers/Module.ts"
 
 export function generateStats(
-    modules: Module[],
+    modules: Set<Module>,
     managers: readonly Manager[] | Manager[] = allManagers,
 ): Stats {
     const stats: Stats = {}

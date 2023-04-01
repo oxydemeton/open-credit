@@ -93,10 +93,10 @@ the script uses to identify modules.
 ## Supported Managers
 
 - [x] Npm (using package.lock file). called "npm" in config
+- [x] Pnpm (using pnpm-lock.yaml). called "pnpm" in config and found modules are collected as npm modules in outputs.
 - [x] Cargo (using cargo.lock and optionally cargo api). called "cargo" in
       config
 - [x] Deno (using deno.lock file)
-- [ ] Pnpm
 - [ ] Yarn
 - [ ] Comments in files
 - [ ] Special files

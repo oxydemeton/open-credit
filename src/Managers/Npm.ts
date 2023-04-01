@@ -105,7 +105,6 @@ export async function crawlNpmLock(
     if (!json.packages || json.packages.length === 0) return []
 
     const modules: Set<Module> = new Set()
-    const a = { a: "", b: 10 }
 
     for (let i = 0; i < Object.keys(json.packages).length; i++) {
         const key = Object.keys(json.packages)[i]
@@ -139,7 +138,7 @@ export async function crawlNpmLock(
     return [...modules]
 }
 
-function parsePackageJson(json: any): Module {
+export function parsePackageJson(json: any): Module {
     const mod: Module = { manager: "npm" }
     if (json.name) mod.name = json.name.toString()
     if (json.author) {
@@ -173,7 +172,7 @@ function parsePackageJson(json: any): Module {
     return mod
 }
 
-async function readCache(
+export async function readCache(
     path: string,
     integrity: string,
     config: Config,
@@ -195,7 +194,7 @@ async function readCache(
     }
 }
 
-async function writeCache(
+export async function writeCache(
     path: string,
     integrity: string,
     mod: Module,
