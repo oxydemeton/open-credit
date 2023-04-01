@@ -6,5 +6,5 @@ also only includes npm as manager, to only search for node modules.
 
 ## Run
 
-1. run `npm i` or `pnpm i` to create node_modules
+1. run `npm i` to create node_modules
 2. run `deno run <path to opencredits> run --conf custom_conf.json`

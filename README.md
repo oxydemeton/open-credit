@@ -87,15 +87,17 @@ When running opencredit you can specify:
 ## Examples
 
 You can find example of different managers in the examples directory. You need
-to run npm/pnpm install in the `npm` folder to create your node modules which
+to run npm install in the `npm` folder to create your node modules which
 the script uses to identify modules.
 
 ## Supported Managers
 
-- [x] Npm/Pnpm (using node_modules folder). called "npm" in config
+- [x] Npm (using package.lock file). called "npm" in config
 - [x] Cargo (using cargo.lock and optionally cargo api). called "cargo" in
       config
 - [x] Deno (using deno.lock file)
+- [ ] Pnpm
+- [ ] Yarn
 - [ ] Comments in files
 - [ ] Special files
 
