@@ -22,6 +22,7 @@ export const commands: Map<Commands, Command> = new Map([
             "-h | Print help",
             "--conf <file_name> | Overwrite the name of the config file. Default: opencredit.jsonc",
             "--managers <manager1,manager2,...> | Specify which managers should be used. Default: cargo,npm,deno",
+            "--cache <cache_path> | Specify the path to the cache. Default: as in config file",
         ],
     }],
     ["stats", {

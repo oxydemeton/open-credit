@@ -16,7 +16,7 @@ if (args[0] === "init") {
         ? args[1].overwrite_config
         : "opencredit.jsonc"
     const managers = args[1]?.overwrite_managers
-    await initConfigFile(path, managers ? managers : allManagers)
+    await initConfigFile(path, managers ? managers : allManagers, args[1]?.cache)
     console.log("Created config file: " + path)
     Deno.exit(0)
 }
