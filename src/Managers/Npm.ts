@@ -105,7 +105,6 @@ export async function crawlNpmLock(
     if (!json.packages || json.packages.length === 0) return []
 
     const modules: Set<Module> = new Set()
-    const a = { a: "", b: 10 }
 
     for (let i = 0; i < Object.keys(json.packages).length; i++) {
         const key = Object.keys(json.packages)[i]
