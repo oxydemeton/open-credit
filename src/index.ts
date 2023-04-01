@@ -6,15 +6,21 @@ import { init as initConfigFile } from "./cli/Init.ts"
 import { generateJson } from "./Generators/Json.ts"
 import { generateStats, statsToString } from "./cli/Stats.ts"
 import { allManagers } from "./Managers/Module.ts"
+import { clearCache } from "./cli/ClearCache.ts"
 
 const args = parseArgs()
+
 if (args === null) Deno.exit(0)
 if (args[0] === "init") {
     const path = args[1]?.overwrite_config
         ? args[1].overwrite_config
         : "opencredit.jsonc"
     const managers = args[1]?.overwrite_managers
-    await initConfigFile(path, managers ? managers : allManagers)
+    await initConfigFile(
+        path,
+        managers ? managers : allManagers,
+        args[1]?.cache,
+    )
     console.log("Created config file: " + path)
     Deno.exit(0)
 }
@@ -25,6 +31,12 @@ const config = readConfig(config_path)!
 if (args[1]?.overwrite_json) config.json_report = args[1]?.overwrite_json
 if (args[1]?.overwrite_md) config.output = args[1]?.overwrite_md
 if (args[1]?.overwrite_managers) config.managers = args[1]?.overwrite_managers
+if (args[1]?.cache !== undefined) config.cache = args[1]?.cache
+
+if (args[0] === "clear-cache") {
+    await clearCache(config)
+    Deno.exit(0)
+}
 
 //Collect Modules
 const modules = await collectAll(config)

@@ -55,6 +55,7 @@ The config file is a json or jsonc file for different settings. Default
 - `allow_api_calls`: Rather opencredit is allowed to call apis (cargo api) to
   get further information about packages etc.
 - `managers`: Array of managers which will be searched for.
+- `cache`: String/path to directory to store cache or false to disable cache.
 
 ### CLI
 
@@ -69,6 +70,7 @@ The config file is a json or jsonc file for different settings. Default
   Use `--conf` to specify a non default config file name. Use `--json` to also
   generate a json overview over all dependencies and `--md` to overwrite the
   output file. `--managers` will overwrite the managers from the config file.
+- `clear-cache`: Clears all configured(path, managers) cache from opencredit.
 
 ### Args
 
@@ -79,21 +81,121 @@ When running opencredit you can specify:
 - `--md` to overwrite the output of the markdown file
 - `--managers` to overwrite the managers. You can list multiple managers like:
   npm,deno
+- `--cache` to overwrite the cache setting. You can use `false` for disabling
+  caching and `<path>` to set a different directory.
 
 ## Examples
 
 You can find example of different managers in the examples directory. You need
-to run npm/pnpm install in the `npm` folder to create your node modules which
+to run npm install in the `npm` folder to create your node modules which
 the script uses to identify modules.
 
 ## Supported Managers
 
-- [x] Npm/Pnpm (using node_modules folder). called "npm" in config
+- [x] Npm (using package.lock file). called "npm" in config
 - [x] Cargo (using cargo.lock and optionally cargo api). called "cargo" in
       config
 - [x] Deno (using deno.lock file)
+- [ ] Pnpm
+- [ ] Yarn
 - [ ] Comments in files
 - [ ] Special files
+
+## Caching
+
+Caching is done separate for each project.
+
+### Configuration
+
+#### Config file
+
+-`"cache": false` disables caching for the project. -`"cache": "<path>"` gives a
+directory where the cache will be located. Default: `./.cache/opencredit`
+
+### Console parameter
+
+The console parameter work the same and will overwrite the config file for the
+run.<br>Example disabling cache:
+
+```sh
+$ opencredit stats --cache=false
+```
+
+### Usecase
+
+For now Caching is implemented for npm and cargo and it uses the provided
+checksums to revalidate when needed.<br> Performance difference is minimal when
+reading or writing cache!<br> BUT when api calls for cargo are enabled traffic
+is minimized and performance is improved.<br>
+
+#### Test case [surrealdb](https://github.com/surrealdb/surrealdb)(475 crates)
+
+Comparison on Windows11 with `stats` command and `api calls enabled`:<br>
+Without cache:
+
+```
+$ Measure-Command {opencredit.exe stats --cache=false}
+```
+
+Output (on my machine):
+
+```
+Days              : 0
+Hours             : 0
+Minutes           : 1
+Seconds           : 13
+Milliseconds      : 288
+Ticks             : 732885113
+TotalDays         : 0,000848246658564815
+TotalHours        : 0,0203579198055556
+TotalMinutes      : 1,22147518833333
+TotalSeconds      : 73,2885113
+TotalMilliseconds : 73288,5113
+```
+
+With enabled cache (first time / creating cache):
+
+```
+$ Measure-Command {opencredit.exe stats --cache="./.cache"}
+```
+
+Output:
+
+```
+Days              : 0
+Hours             : 0
+Minutes           : 1
+Seconds           : 13
+Milliseconds      : 519
+Ticks             : 735193463
+TotalDays         : 0,000850918359953704
+TotalHours        : 0,0204220406388889
+TotalMinutes      : 1,22532243833333
+TotalSeconds      : 73,5193463
+TotalMilliseconds : 73519,3463
+```
+
+With enabled cache (second time / reading cache):
+
+```
+$ Measure-Command {opencredit.exe stats --cache="./.cache"}
+```
+
+Output:
+
+```
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 12
+Milliseconds      : 440
+Ticks             : 124403273
+TotalDays         : 0,000143985269675926
+TotalHours        : 0,00345564647222222
+TotalMinutes      : 0,207338788333333
+TotalSeconds      : 12,4403273
+TotalMilliseconds : 12440,3273
+```
 
 ## Additional plans
 

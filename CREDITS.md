@@ -6,6 +6,10 @@
 - random
     - Version: 0.13.2
 ### NPM Modules
+- npm
+    - Author: oxydemeton
+    - Version: 1.0.0
+    - License: ISC
 - random
     - Author: Travis Fischer <travis@transitivebullsh.it>
     - Version: 4.1.0
@@ -16,6 +20,7 @@
     - Version: 3.0.5
     - License: MIT
     - Description: Seeded random number generator for Javascript.
+    - Homepage: http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html
 ### Deno Modules
 - std
     - Version: 0.177.0
