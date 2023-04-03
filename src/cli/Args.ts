@@ -10,13 +10,13 @@ export function parse(): null | [Commands, Args | null] {
     })
     if (args.v) { //Version
         console.log("Open-credit " + runtime.versions.opencredit)
-        console.log("Deno " + runtime.versions.deno);
-        console.log("V8 " + runtime.versions.v8);
-        console.log("Typescript " + runtime.versions.typescript);
-        console.log("Build:");
-        console.log("  OS: " + runtime.build.os);
-        console.log("  Arch: " + runtime.build.arch);
-        console.log("  Target: " + runtime.build.target);        
+        console.log("Deno " + runtime.versions.deno)
+        console.log("V8 " + runtime.versions.v8)
+        console.log("Typescript " + runtime.versions.typescript)
+        console.log("Build:")
+        console.log("  OS: " + runtime.build.os)
+        console.log("  Arch: " + runtime.build.arch)
+        console.log("  Target: " + runtime.build.target)
         return null
     }
     if (args._[0] == "init") {
