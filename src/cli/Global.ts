@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export const runtime = {
     versions: {
         opencredit: "0.3.1",
@@ -12,6 +11,3 @@ export const runtime = {
         target: Deno.build.target,
     },
 }
-=======
-export const version = "v.0.3.1"
->>>>>>> 7de34e2863e9a4fca81400ab31ed256e11b3759e
