@@ -1,6 +1,6 @@
 import * as Flags from "https://deno.land/std@0.181.0/flags/mod.ts"
 import { allManagers, Manager } from "../Managers/Module.ts"
-import { version } from "./Global.ts"
+import { runtime } from "./Global.ts"
 import { Command, Commands, commands } from "./Commands.ts"
 
 export function parse(): null | [Commands, Args | null] {
@@ -9,12 +9,19 @@ export function parse(): null | [Commands, Args | null] {
         string: ["md", "json", "conf", "managers", "cache"],
     })
     if (args.v) { //Version
-        console.log("Open-credit " + version)
+        console.log("Open-credit " + runtime.versions.opencredit)
+        console.log("Deno " + runtime.versions.deno);
+        console.log("V8 " + runtime.versions.v8);
+        console.log("Typescript " + runtime.versions.typescript);
+        console.log("Build:");
+        console.log("  OS: " + runtime.build.os);
+        console.log("  Arch: " + runtime.build.arch);
+        console.log("  Target: " + runtime.build.target);        
         return null
     }
     if (args._[0] == "init") {
         if (args.h) {
-            console.log("Open-credit " + version)
+            console.log("Opencredit: " + runtime.versions.opencredit)
             console.log("Init:")
             console.log(
                 "Creates a opencredit.jsonc config with default values.",
@@ -39,7 +46,7 @@ export function parse(): null | [Commands, Args | null] {
     }
     if (args._[0] == "run") {
         if (args.h) {
-            console.log("Open-credit " + version)
+            console.log("Opencredit: " + runtime.versions.opencredit)
             commandHelp(commands.get("run")!, "clear-cache")
             return null
         }
@@ -60,7 +67,7 @@ export function parse(): null | [Commands, Args | null] {
 
     if (args._[0] == "stats") {
         if (args.h) {
-            console.log("Open-credit " + version)
+            console.log("Opencredit: " + runtime.versions.opencredit)
             commandHelp(commands.get("stats")!, "clear-cache")
             return null
         }
@@ -75,7 +82,7 @@ export function parse(): null | [Commands, Args | null] {
     }
     if (args._[0] == "clear-cache") {
         if (args.h) {
-            console.log("Open-credit " + version)
+            console.log("Opencredit: " + runtime.versions.opencredit)
             commandHelp(commands.get("clear-cache")!, "clear-cache")
             return null
         }
@@ -87,7 +94,7 @@ export function parse(): null | [Commands, Args | null] {
         }]
     }
     //Print general Help
-    console.log("Open-credit " + version)
+    console.log("Opencredit: " + runtime.versions.opencredit)
     console.log("Commands:")
     commands.forEach((cmd, name) => {
         commandHelp(cmd, name, 2)
