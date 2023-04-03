@@ -1,10 +1,10 @@
-import { walk } from "https://deno.land/std@0.181.0/fs/walk.ts"
+import { walk } from "std/fs/walk.ts"
 import { Module } from "./Module.ts"
 import { Config } from "../config/Config.ts"
-import * as Path from "https://deno.land/std@0.181.0/path/mod.ts"
+import * as Path from "std/path/mod.ts"
 import { NpmCache, NpmCacheOld } from "../cache/NpmCache.ts"
-import * as Crypto from "https://deno.land/std@0.181.0/crypto/crypto.ts"
-import { toHashString } from "https://deno.land/std@0.181.0/crypto/to_hash_string.ts"
+import * as Crypto from "std/crypto/crypto.ts"
+import { toHashString } from "std/crypto/to_hash_string.ts"
 
 export async function crawlNodeModulesOld(
     root: string,
@@ -98,11 +98,11 @@ async function writeCacheOld(
 export async function crawlNpmLock(
     path: string,
     config: Config,
-): Promise<Module[]> {
+): Promise<Set<Module>> {
     //Read package-lock.json
     const package_lock = await Deno.readTextFile(path)
     const json = JSON.parse(package_lock) as any
-    if (!json.packages || json.packages.length === 0) return []
+    if (!json.packages || json.packages.length === 0) return new Set()
 
     const modules: Set<Module> = new Set()
 
@@ -135,7 +135,7 @@ export async function crawlNpmLock(
             }
         }
     }
-    return [...modules]
+    return modules
 }
 
 export function parsePackageJson(json: any): Module {

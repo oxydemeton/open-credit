@@ -1,4 +1,4 @@
-import * as Flags from "https://deno.land/std@0.181.0/flags/mod.ts"
+import * as Flags from "std/flags/mod.ts"
 import { allManagers, Manager } from "../Managers/Module.ts"
 import { runtime } from "./Global.ts"
 import { Command, Commands, commands } from "./Commands.ts"

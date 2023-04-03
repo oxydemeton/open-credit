@@ -96,7 +96,8 @@ the script uses to identify modules.
 - [x] Pnpm (using pnpm-lock.yaml). called "pnpm" in config and found modules are collected as npm modules in outputs.
 - [x] Cargo (using cargo.lock and optionally cargo api). called "cargo" in
       config
-- [x] Deno (using deno.lock file)
+- [x] Deno (using deno.lock file and optionally [deno api](https://apiland.deno.dev/)). called "deno" in
+      config
 - [ ] Yarn
 - [ ] Comments in files
 - [ ] Special files
@@ -128,7 +129,8 @@ checksums to revalidate when needed.<br> Performance difference is minimal when
 reading or writing cache!<br> BUT when api calls for cargo are enabled traffic
 is minimized and performance is improved.<br>
 
-#### Test case [surrealdb](https://github.com/surrealdb/surrealdb)(475 crates)
+#### Benchmarks
+#####  [surrealdb](https://github.com/surrealdb/surrealdb)(475 crates)
 
 Comparison on Windows11 with `stats` command and `api calls enabled`:<br>
 Without cache:
@@ -195,6 +197,75 @@ TotalHours        : 0,00345564647222222
 TotalMinutes      : 0,207338788333333
 TotalSeconds      : 12,4403273
 TotalMilliseconds : 12440,3273
+```
+
+#####  [fresh website](https://fresh.deno.dev/)(37 Deno Modules)
+
+Comparison on Windows11 with `stats` command and `api calls enabled`:<br>
+Without cache:
+
+```
+$ Measure-Command {opencredit.exe stats --cache=false}
+```
+
+Output (on my machine):
+
+```
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 6
+Milliseconds      : 597
+Ticks             : 65979384
+TotalDays         : 7,63650277777778E-05
+TotalHours        : 0,00183276066666667
+TotalMinutes      : 0,10996564
+TotalSeconds      : 6,5979384
+TotalMilliseconds : 6597,9384
+```
+
+With enabled cache (first time / creating cache):
+
+```
+$ Measure-Command {opencredit.exe stats --cache="./.cache"}
+```
+
+Output:
+
+```
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 6
+Milliseconds      : 548
+Ticks             : 65481982
+TotalDays         : 7,57893310185185E-05
+TotalHours        : 0,00181894394444444
+TotalMinutes      : 0,109136636666667
+TotalSeconds      : 6,5481982
+TotalMilliseconds : 6548,1982
+```
+
+With enabled cache (second time / reading cache):
+
+```
+$ Measure-Command {opencredit.exe stats --cache="./.cache"}
+```
+
+Output:
+
+```
+Days              : 0
+Hours             : 0
+Minutes           : 0
+Seconds           : 0
+Milliseconds      : 83
+Ticks             : 837215
+TotalDays         : 9,68998842592592E-07
+TotalHours        : 2,32559722222222E-05
+TotalMinutes      : 0,00139535833333333
+TotalSeconds      : 0,0837215
+TotalMilliseconds : 83,7215
 ```
 
 ## Additional plans

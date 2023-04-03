@@ -1,4 +1,4 @@
-import { assert } from "https://deno.land/std@0.177.0/testing/asserts.ts"
+import { assert } from "std/testing/asserts.ts"
 import { Module } from "../Managers/Module.ts"
 
 export function splitByManager(

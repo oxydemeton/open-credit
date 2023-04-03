@@ -2,7 +2,7 @@ import { Config } from "../config/Config.ts"
 import { crawlCargoLock } from "../Managers/Cargo.ts"
 import { Module } from "../Managers/Module.ts"
 import { crawlNpmLock } from "../Managers/Npm.ts"
-import { walk } from "https://deno.land/std@0.181.0/fs/walk.ts"
+import { walk } from "std/fs/walk.ts"
 import { crawlDenoImports } from "../Managers/Deno.ts"
 import { crawlPnpmLock } from "../Managers/Pnpm.ts"
 
@@ -44,7 +44,7 @@ export async function collectAll(config: Config): Promise<Set<Module>> {
                         ...modules,
                         ...await crawlDenoImports(
                             entry.path,
-                            config.allow_api_calls,
+                            config,
                         ),
                     ])
                 }
