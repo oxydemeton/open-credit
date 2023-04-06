@@ -17,7 +17,10 @@ export function generate(modules: Set<Module>): string {
     if (split_modules.cargo.length > 0) writeLine("### Cargo Modules")
     split_modules.cargo.forEach((mod) => {
         writeLine("- " + mod.name)
-        if (mod.author) writeLine("    - Author: " + mod.author)
+        if (mod.author){
+            if (Array.isArray(mod.author)) writeLine("    - Author: " + mod.author.join(", "))
+            else writeLine("    - Author: " + mod.author)
+        }
         if (mod.version) writeLine("    - Version: " + mod.version)
         if (mod.license) writeLine("    - License: " + mod.license)
         if (mod.repo) writeLine("    - Repository: " + mod.repo)
