@@ -87,20 +87,38 @@ When running opencredit you can specify:
 ## Examples
 
 You can find example of different managers in the examples directory. You need
-to run npm install in the `npm` folder to create your node modules which
-the script uses to identify modules.
+to run npm install in the `npm` folder to create your node modules which the
+script uses to identify modules.
 
 ## Supported Managers
 
 - [x] Npm (using package.lock file). called "npm" in config
-- [x] Pnpm (using pnpm-lock.yaml). called "pnpm" in config and found modules are collected as npm modules in outputs.
+- [x] Pnpm (using pnpm-lock.yaml). called "pnpm" in config and found modules are
+      collected as npm modules in outputs.
 - [x] Cargo (using cargo.lock and optionally cargo api). called "cargo" in
       config
-- [x] Deno (using deno.lock file and optionally [deno api](https://apiland.deno.dev/)). called "deno" in
-      config
+- [x] Deno (using deno.lock file and optionally
+      [deno api](https://apiland.deno.dev/)). called "deno" in config
+- [x] [Special files](#Credit.yaml)
 - [ ] Yarn
 - [ ] Comments in files
-- [ ] Special files
+
+## Credit.yaml
+
+A credit.yaml (fixed name) can contain additional information about a package,
+authors or other stuff.<br> It can contain one or multiple packages and only one
+can be used per directory.<br> Examples can be found in the
+[examples directory](./examples/credit-yaml/).<br> It must provide a `name`
+field and may have:
+
+- `version`: Version of the package as a string.
+- `description`: Description of the package as a string.
+- `author`: Name of an author or an array of authors. Objects for each author
+  are also supported but will be outputted as json.
+- `license`: License of the package as a string. Objects are also supported but
+  will be outputted as json.
+- `repo`: Repository of the package as a string.
+- `homepage`: Homepage of the package as a string.
 
 ## Caching
 
@@ -130,7 +148,8 @@ reading or writing cache!<br> BUT when api calls for cargo are enabled traffic
 is minimized and performance is improved.<br>
 
 #### Benchmarks
-#####  [surrealdb](https://github.com/surrealdb/surrealdb)(475 crates)
+
+##### [surrealdb](https://github.com/surrealdb/surrealdb)(475 crates)
 
 Comparison on Windows11 with `stats` command and `api calls enabled`:<br>
 Without cache:
@@ -199,7 +218,7 @@ TotalSeconds      : 12,4403273
 TotalMilliseconds : 12440,3273
 ```
 
-#####  [fresh website](https://fresh.deno.dev/)(37 Deno Modules)
+##### [fresh website](https://fresh.deno.dev/)(37 Deno Modules)
 
 Comparison on Windows11 with `stats` command and `api calls enabled`:<br>
 Without cache:
