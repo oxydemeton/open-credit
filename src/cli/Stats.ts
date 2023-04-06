@@ -14,7 +14,11 @@ export function generateStats(
         if (!mod.manager || managers.includes(mod.manager)) {
             if (mod.author) {
                 if (!stats.authors) stats.authors = new Set()
-                stats.authors.add(mod.author)
+                if (Array.isArray(mod.author)) {
+                    mod.author.forEach((author) => {
+                        stats.authors?.add(author)
+                    })
+                } else stats.authors.add(mod.author)
             }
             if (mod.license) {
                 if (!stats.licenses) stats.licenses = new Set()
