@@ -8,12 +8,12 @@
     - Second one
     - name: Third one
   license:
-    type: Some License
-    url: example.com
+    type: Apache License 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
 
 - name: Second Example
   license:
-    name: Unlicense
+    name: Unknown license
   description: No further information \:-(
 
 - Third
