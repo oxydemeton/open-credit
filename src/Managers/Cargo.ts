@@ -73,7 +73,7 @@ async function crateRequest(
     }
     if (crate.homepage) mod.homepage = crate.homepage.toString()
     if (crate.license) mod.license = crate.license.toString()
-    if (crate.authors){
+    if (crate.authors) {
         if (Array.isArray(crate.authors)) mod.author = crate.authors
         else mod.author = crate.authors.toString()
     }

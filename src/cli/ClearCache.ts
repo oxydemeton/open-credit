@@ -7,7 +7,7 @@ export async function clearCache(conf: Config) {
     if (cache) {
         try {
             Deno.removeSync(cache, { recursive: true })
-        }catch (error) {
+        } catch (error) {
             console.error("Unable to clear cache")
         }
     }

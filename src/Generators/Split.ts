@@ -3,7 +3,7 @@ import { Module } from "../Managers/Module.ts"
 
 export function splitByManager(
     modules: Set<Module>,
-): { npm: Module[]; cargo: Module[]; deno: Module[], credit_yaml: Module[] } {
+): { npm: Module[]; cargo: Module[]; deno: Module[]; credit_yaml: Module[] } {
     const cargoModules: Module[] = []
     const npmModules: Module[] = []
     const denoModules: Module[] = []
@@ -16,10 +16,9 @@ export function splitByManager(
             npmModules.push(mod)
         } else if (mod.manager === "deno") {
             denoModules.push(mod)
-        } else if (mod.manager === "credit.yaml") { 
+        } else if (mod.manager === "credit.yaml") {
             credit_yamlModules.push(mod)
-        }
-        else {
+        } else {
             assert(false, "Unknown module manager: " + mod.manager)
         }
     })

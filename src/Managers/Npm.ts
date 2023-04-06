@@ -145,8 +145,7 @@ export function parsePackageJson(json: any): Module {
         if (typeof json.author === "string") mod.author = json.author.toString()
         else if (Array.isArray(json.author)) {
             mod.author = json.author
-        }
-        else if (typeof json.author === "object") {
+        } else if (typeof json.author === "object") {
             mod.author = JSON.stringify(json.author)
         }
     }

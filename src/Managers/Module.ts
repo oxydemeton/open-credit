@@ -11,4 +11,10 @@ export class Module {
 }
 
 export type Manager = "cargo" | "npm" | "deno" | "pnpm" | "credit.yaml"
-export const allManagers = ["cargo", "npm", "deno", "pnpm", "credit.yaml"] as const
+export const allManagers = [
+    "cargo",
+    "npm",
+    "deno",
+    "pnpm",
+    "credit.yaml",
+] as const

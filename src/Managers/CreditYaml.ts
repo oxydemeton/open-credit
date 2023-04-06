@@ -1,8 +1,11 @@
-import { Config } from "../config/Config.ts";
-import { Module } from "./Module.ts";
-import {parse as parseYaml} from "std/yaml/parse.ts";
+import { Config } from "../config/Config.ts"
+import { Module } from "./Module.ts"
+import { parse as parseYaml } from "std/yaml/parse.ts"
 
-export async function parseCreditYaml(path:string, config: Config): Promise<Set<Module>> {
+export async function parseCreditYaml(
+    path: string,
+    config: Config,
+): Promise<Set<Module>> {
     const modules = new Set<Module>()
     const content = parseYaml(await Deno.readTextFile(path)) as any
     const yamlModules: any[] = []
@@ -23,13 +26,14 @@ export async function parseCreditYaml(path:string, config: Config): Promise<Set<
         if (mod.name) module.name = mod.name
         if (mod.version) module.version = mod.version
         if (mod.author && Array.isArray(mod.author)) {
-            const authors: string[] = [];
+            const authors: string[] = []
             mod.author.forEach((author) => {
                 if (typeof author === "string") {
                     authors.push(author)
                 } else if (typeof author === "object") {
-                    if (Object.keys(author).length === 1 && author.name) authors.push(author.name)
-                    else authors.push(JSON.stringify(author))
+                    if (Object.keys(author).length === 1 && author.name) {
+                        authors.push(author.name)
+                    } else authors.push(JSON.stringify(author))
                 }
             })
             module.author = authors
@@ -50,6 +54,6 @@ export async function parseCreditYaml(path:string, config: Config): Promise<Set<
         if (mod.documentation) module.documentation = mod.documentation
         modules.add(module)
     })
-    
+
     return modules
 }

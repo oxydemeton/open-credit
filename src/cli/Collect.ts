@@ -5,7 +5,7 @@ import { crawlNpmLock } from "../Managers/Npm.ts"
 import { walk } from "std/fs/walk.ts"
 import { crawlDenoImports } from "../Managers/Deno.ts"
 import { crawlPnpmLock } from "../Managers/Pnpm.ts"
-import { parseCreditYaml } from "../Managers/CreditYaml.ts";
+import { parseCreditYaml } from "../Managers/CreditYaml.ts"
 
 export async function collectAll(config: Config): Promise<Set<Module>> {
     let modules: Set<Module> = new Set()
@@ -51,7 +51,9 @@ export async function collectAll(config: Config): Promise<Set<Module>> {
                 }
                 break
             case "credit.yaml":
-                if (config.managers && !config.managers.includes("credit.yaml")) break
+                if (
+                    config.managers && !config.managers.includes("credit.yaml")
+                ) break
                 if (!config.exclude.includes(entry.path) && entry.isFile) {
                     modules = new Set([
                         ...modules,
