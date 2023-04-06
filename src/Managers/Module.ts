@@ -1,5 +1,5 @@
 export class Module {
-    author?: string
+    author?: string[] | string
     name?: string
     version?: string
     license?: string
