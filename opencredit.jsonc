@@ -1,6 +1,6 @@
 {
     "output": "CREDITS.md", //Output File in Markdown
-    "exclude": [], //Directories to exclude
+    "exclude": ["./examples"], //Directories to exclude
     "json_report": "opencredit.report.json", //Optional: json file with detailed information
     "allow_api_calls": true, //If Deno is allowed to called apis to get additional information about packages
     "managers": [ //List of all managers in use. If not set all will be used. Names are case insensitive

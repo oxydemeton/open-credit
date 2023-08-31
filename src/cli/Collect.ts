@@ -6,10 +6,21 @@ import { walk } from "std/fs/walk.ts"
 import { crawlDenoImports } from "../Managers/Deno.ts"
 import { crawlPnpmLock } from "../Managers/Pnpm.ts"
 import { parseCreditYaml } from "../Managers/CreditYaml.ts"
+import { parse as parsePath, join as joinPath } from "std/path/mod.ts";
 
 export async function collectAll(config: Config): Promise<Set<Module>> {
     let modules: Set<Module> = new Set()
     for await (const entry of walk(".")) {
+        const absoluteDir = parsePath(joinPath(Deno.cwd(), entry.path)).dir
+        let skip = false
+        console.log(absoluteDir);
+        for (const exclude of config.exclude) {
+            if (absoluteDir.startsWith(exclude)){
+                skip = true                
+                break
+            }
+        }
+        if (skip) continue
         switch (entry.name) {
             case "package-lock.json":
                 if (config.managers && !config.managers.includes("npm")) break
