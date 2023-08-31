@@ -1,7 +1,7 @@
 import { CargoCache } from "../cache/CargoCache.ts"
 import { Config } from "../config/Config.ts"
 import { Module } from "./Module.ts"
-import { parse } from "std/encoding/toml.ts"
+import { parse } from "std/toml/parse.ts"
 import * as Path from "std/path/mod.ts"
 
 export async function crawlCargoLock(
