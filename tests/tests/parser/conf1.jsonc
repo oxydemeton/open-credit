@@ -1,5 +1,4 @@
 {
-    "$schema": "./schema.json",
     "output": "CREDITS.md", //Output File in Markdown
     "exclude": ["./examples", "./tests"], //Directories to exclude
     "json_report": "opencredit.report.json", //Optional: json file with detailed information

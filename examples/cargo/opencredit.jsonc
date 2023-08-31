@@ -3,5 +3,6 @@
   "exclude": [],
   "allow_api_calls": true,
   "managers": ["cargo"],
-  "json_report": "credits.json"
+  "json_report": "credits.json",
+  "cache": false
 }

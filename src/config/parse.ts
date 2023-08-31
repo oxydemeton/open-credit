@@ -1,8 +1,10 @@
 import { parse } from "std/jsonc/parse.ts"
 import { Config } from "./Config.ts"
 import { defaultConfig } from "./default.ts"
+import { isArray } from "std/yaml/_utils.ts"
+import { join as joinPaths} from "std/path/mod.ts";
 
-export function parseConfig(txt: string): Config {
+export function parseConfig(txt: string, basePath: string|undefined = undefined): Config {
     const config = defaultConfig
     const json = parse(txt) as any
     if (typeof json.output === "string") {
@@ -13,12 +15,16 @@ export function parseConfig(txt: string): Config {
                 " but type string is expected.",
         )
     }
-    if (typeof json.exclude === "object") {
-        config.exclude = json.exclude
+    if (isArray(json.exclude)) {
+        config.exclude = (json.exclude as Array<any>).map((e) => {
+            if (basePath === undefined) return e.toString()            
+            return joinPaths(basePath, e.toString())
+        })
+
     } else if (json.exclude !== undefined) {
         console.error(
             'Config Error: "exclude" is of type ' + typeof json.exclude +
-                " but type object/array is expected.",
+                " but a array is expected.",
         )
     }
     if (typeof json.json_report === "string") {

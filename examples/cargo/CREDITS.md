@@ -2,4 +2,7 @@
 ## Modules
 ### Cargo Modules
 - random
-    - Version: 0.13.2
+    - Repository: https://github.com/stainless-steel/random
+    - Description: The package provides sources of randomness.
+    - Documentation: https://docs.rs/random
+    - Homepage: https://github.com/stainless-steel/random

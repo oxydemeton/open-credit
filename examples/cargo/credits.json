@@ -3,7 +3,10 @@
         {
             "manager": "cargo",
             "name": "random",
-            "version": "0.13.2"
+            "description": "The package provides sources of randomness.",
+            "documentation": "https://docs.rs/random",
+            "homepage": "https://github.com/stainless-steel/random",
+            "repo": "https://github.com/stainless-steel/random"
         }
     ]
 }

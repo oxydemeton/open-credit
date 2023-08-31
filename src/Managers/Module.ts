@@ -1,5 +1,5 @@
 export class Module {
-    author?: string
+    author?: string[] | string
     name?: string
     version?: string
     license?: string
@@ -10,5 +10,11 @@ export class Module {
     manager?: Manager
 }
 
-export type Manager = "cargo" | "npm" | "deno" | "pnpm"
-export const allManagers = ["cargo", "npm", "deno", "pnpm"] as const
+export type Manager = "cargo" | "npm" | "deno" | "pnpm" | "credit.yaml"
+export const allManagers = [
+    "cargo",
+    "npm",
+    "deno",
+    "pnpm",
+    "credit.yaml",
+] as const

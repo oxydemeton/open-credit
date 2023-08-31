@@ -1,0 +1,20 @@
+# Example with multiple mentions
+- name: First example
+  description: Multiple Authors and detailed once
+  author:
+    - name: Odydemeton
+      email: contact@mabla.name
+      github: https://github.com/oxydemeton
+    - Second one
+    - name: Third one
+  license:
+    type: Apache License 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+
+- name: Second Example
+  license:
+    name: Unknown license
+  description: No further information \:-(
+
+- Third
+- And Fourth
