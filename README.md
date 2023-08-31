@@ -48,10 +48,8 @@ The config file is a json or jsonc file for different settings. Default
 ##### Options:
 
 - `output`: Path and name of the output markdown file.
-- `exclude`: Which files with path and name to exclude. Folders are not
-  supported yet.
+- `exclude`: Which files with path and name to exclude.
 - `json_report`: Optional: Path and name of a json file with all information.
-  Not implemented yet.
 - `allow_api_calls`: Rather opencredit is allowed to call apis (cargo api) to
   get further information about packages etc.
 - `managers`: Array of managers which will be searched for.
