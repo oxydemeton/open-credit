@@ -14,7 +14,6 @@ export async function collectAll(config: Config): Promise<Set<Module>> {
         //Exclude directories
         const absoluteDir = joinPath(Deno.cwd(), entry.path)
         let skip = false
-        console.log(absoluteDir);
         for (const exclude of config.exclude) {
             if (absoluteDir.startsWith(exclude)){
                 skip = true                
