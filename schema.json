@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "output": {
+        "type": "string"
+      },
+      "exclude": {
+        "type": "array",
+        "items": {
+            "type": "string"
+        }
+      },
+      "json_report": {
+        "type": "string"
+      },
+      "allow_api_calls": {
+        "type": "boolean"
+      },
+      "managers": {
+        "type": "array",
+        "items":
+        {
+          "type": "string"
+        }
+      },
+      "cache": {
+        "type": ["string", "boolean"]
+      }
+    },
+    "required": [
+      "output",
+      "exclude",
+      "json_report",
+      "allow_api_calls"
+    ]
+  }
